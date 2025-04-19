@@ -5,8 +5,8 @@ import styles from "./styles.module.css";
 const Header = () => {
   return (
     <header className={styles.header}>
-      <h1>react movies</h1>
-      <p>{formatDate(new Date())}</p>
+      <h1 className={styles.title}>react movies</h1>
+      <p className={styles.date}>{formatDate(new Date())}</p>
     </header>
   );
 };

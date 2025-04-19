@@ -7,3 +7,12 @@
   background-color: white;
   border-bottom: 1px solid #f2f4f5;
 }
+
+.title {
+  font-size: 28px;
+  text-transform: uppercase;
+}
+
+.date {
+  font-size: 16px;
+}
