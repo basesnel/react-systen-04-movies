@@ -1,8 +1,12 @@
+import formatDate from "../../helpers/formatDate";
+
+import styles from "./styles.module.css";
+
 const Header = () => {
   return (
-    <header>
+    <header className={styles.header}>
       <h1>react movies</h1>
-      <p></p>
+      <p>{formatDate(new Date())}</p>
     </header>
   );
 };
