@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <h1 className={styles.title}>react movies</h1>
-      <p className={styles.date}>{formatDate(new Date())}</p>
+      <p className={styles.datae}>{formatDate(new Date())}</p>
     </header>
   );
 };

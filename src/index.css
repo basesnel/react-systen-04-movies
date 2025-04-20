@@ -6,3 +6,8 @@
   box-sizing: border-box;
   font-family: "Inter", "Sans-serif";
 }
+
+.container {
+  padding: 24px;
+  height: 100vh;
+}
