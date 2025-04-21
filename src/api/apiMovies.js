@@ -21,11 +21,6 @@ const getMovies = async () => {
     .request(options)
     .then((res) => res.data)
     .catch((err) => console.error(err));
-
-  // axios
-  //   .request(options)
-  //   .then((res) => console.log(res.data))
-  //   .catch((err) => console.error(err));
 };
 
 export default getMovies;
