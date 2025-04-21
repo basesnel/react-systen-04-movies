@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import getMovies from "../../api/apiMovies";
 import MoviesBanner from "../../components/MoviesBanner/MoviesBanner";
+import MoviesList from "../../components/MoviesList/MoviesList";
 import styles from "./styles.module.css";
 
 const Main = () => {
@@ -23,6 +24,7 @@ const Main = () => {
   return (
     <main className={styles.main}>
       {movies.length > 0 ? <MoviesBanner item={movies[0]} /> : null}
+      <MoviesList movies={movies} />
     </main>
   );
 };
