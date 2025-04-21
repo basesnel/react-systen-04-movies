@@ -17,20 +17,15 @@ const getMovies = async () => {
     },
   };
 
-  axios
+  return axios
     .request(options)
-    .then((res) => console.log(res.data))
+    .then((res) => res.data)
     .catch((err) => console.error(err));
 
-  // try {
-  //   const response = await axios.get(`${API_BASE_URL}movie/popular`, {
-  //     params: {
-
-  //     }
-  //   });
-  // } catch (error) {
-  //   console.log(error);
-  // }
+  // axios
+  //   .request(options)
+  //   .then((res) => console.log(res.data))
+  //   .catch((err) => console.error(err));
 };
 
 export default getMovies;
