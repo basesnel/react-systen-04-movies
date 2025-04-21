@@ -13,7 +13,7 @@ const Main = () => {
     const fetchMovies = async () => {
       try {
         const response = await getMovies();
-        // console.log(response);
+        console.log(response);
         setMovies(response.results);
       } catch (error) {
         console.error(error);
