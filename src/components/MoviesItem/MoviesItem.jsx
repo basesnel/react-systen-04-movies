@@ -1,4 +1,5 @@
 import formatTimeAgo from "../../helpers/formatTimeAgo";
+
 import styles from "./styles.module.css";
 
 const MoviesItem = ({ item }) => {

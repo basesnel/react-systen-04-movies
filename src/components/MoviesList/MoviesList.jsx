@@ -1,4 +1,5 @@
 import MoviesItem from "../MoviesItem/MoviesItem";
+
 import styles from "./styles.module.css";
 
 const MoviesList = ({ movies }) => {
