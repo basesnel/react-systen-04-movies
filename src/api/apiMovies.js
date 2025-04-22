@@ -35,13 +35,13 @@ const getConfiguration = async () => {
     .catch((err) => console.error(err));
 };
 
-const getMovies = async () => {
+const getMovies = async (page = 1) => {
   const options = {
     url: `${API_BASE_URL}movie/popular`,
     method: "GET",
     params: {
       language: "en-US",
-      page: 1,
+      page,
     },
     headers: {
       accept: "application/json",

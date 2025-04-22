@@ -10,22 +10,24 @@ import styles from "./styles.module.css";
 const Main = () => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPage = 10;
+
+  const fetchMovies = async (currentPage) => {
+    try {
+      setIsLoading(true);
+      const response = await getMovies(currentPage);
+      console.log(response);
+      setIsLoading(false);
+      setMovies(response.results);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        setIsLoading(true);
-        const response = await getMovies();
-        // console.log(response);
-        setIsLoading(false);
-        setMovies(response.results);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchMovies();
-  }, []);
+    fetchMovies(currentPage);
+  }, [currentPage]);
 
   return (
     <main className={styles.main}>
