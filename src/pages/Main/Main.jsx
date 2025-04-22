@@ -30,6 +30,22 @@ const Main = () => {
     fetchMovies(currentPage);
   }, [currentPage]);
 
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handlePageClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <main className={styles.main}>
       {movies.length > 0 && !isLoading ? (
@@ -38,7 +54,13 @@ const Main = () => {
         <Skeleton type="banner" count={1} />
       )}
 
-      <Pagination totalPages={totalPages} />
+      <Pagination
+        handlePreviousPage={handlePreviousPage}
+        handleNextPage={handleNextPage}
+        handlePageClick={handlePageClick}
+        totalPages={totalPages}
+        currentPage={currentPage}
+      />
 
       {!isLoading ? (
         <MoviesList movies={movies} />

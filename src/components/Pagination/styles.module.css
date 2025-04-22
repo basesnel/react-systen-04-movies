@@ -10,6 +10,7 @@
   padding: 8px;
   border: none;
   background-color: white;
+  cursor: pointer;
 }
 
 .list {
@@ -21,4 +22,5 @@
 .arrow {
   border: none;
   background-color: white;
+  cursor: pointer;
 }
