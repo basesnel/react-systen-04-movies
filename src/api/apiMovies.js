@@ -6,15 +6,15 @@ const API_KEY = import.meta.env.VITE_MOVIES_API_KEY;
 const handleError = (error) => {
   if (error.response) {
     const { data, status, headers } = error.response;
-    console.log(data);
-    console.log(status);
-    console.log(headers);
+    console.error(data);
+    console.error(status);
+    console.error(headers);
   } else if (error.request) {
     const { request } = error;
-    console.log(request);
+    console.error(request);
   } else {
     const { message } = error;
-    console.log("Error", message);
+    console.error("Error", message);
   }
   console.log(error.config);
 };
