@@ -1,8 +1,29 @@
+import { useState } from "react";
+import { useEffect } from "react";
+import { getConfiguration } from "./api/apiMovies";
 import Header from "./components/Header/Header";
 import Main from "./pages/Main/Main";
 
 function App() {
-  return (
+  const [configuration, setConfiguration] = useState(null);
+
+  useEffect(() => {
+    const fetchConfiguration = async () => {
+      try {
+        const response = await getConfiguration();
+        console.log(response);
+        setConfiguration(response);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchConfiguration();
+  }, []);
+
+  return !configuration ? (
+    "Loading configuration"
+  ) : (
     <>
       <Header />
       <div className="container">

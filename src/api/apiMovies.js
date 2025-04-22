@@ -19,6 +19,22 @@ const handleError = (error) => {
   console.log(error.config);
 };
 
+const getConfiguration = async () => {
+  const options = {
+    method: "GET",
+    url: `${API_BASE_URL}configuration`,
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${API_KEY}`,
+    },
+  };
+
+  return axios
+    .request(options)
+    .then((res) => res.data)
+    .catch((err) => console.error(err));
+};
+
 const getMovies = async () => {
   const options = {
     url: `${API_BASE_URL}movie/popular`,
@@ -39,4 +55,4 @@ const getMovies = async () => {
     .catch(handleError);
 };
 
-export default getMovies;
+export { getConfiguration, getMovies };
