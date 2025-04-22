@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { getMovies } from "../../api/apiMovies";
 import MoviesBanner from "../../components/MoviesBanner/MoviesBanner";
 import MoviesList from "../../components/MoviesList/MoviesList";
+import Pagination from "../../components/Pagination/Pagination";
 import Skeleton from "../../components/Skeleton/Skeleton";
 
 import styles from "./styles.module.css";
@@ -11,7 +12,7 @@ const Main = () => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPage = 10;
+  const totalPages = 10;
 
   const fetchMovies = async (currentPage) => {
     try {
@@ -36,6 +37,8 @@ const Main = () => {
       ) : (
         <Skeleton type="banner" count={1} />
       )}
+
+      <Pagination totalPages={totalPages} />
 
       {!isLoading ? (
         <MoviesList movies={movies} />
