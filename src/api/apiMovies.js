@@ -74,10 +74,18 @@ const getMovieGenres = async () => {
     .catch(handleError);
 };
 
-const getDiscoveryMovies = async () => {
+const getDiscoveryMovies = async (with_genres) => {
   const options = {
-    url: `${API_BASE_URL}discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=35`,
+    url: `${API_BASE_URL}discover/movie`,
     method: "GET",
+    params: {
+      include_adult: false,
+      include_video: false,
+      language: "en-US",
+      page: 1,
+      sort_by: "popularity.desc",
+      with_genres,
+    },
     headers: {
       accept: "application/json",
       Authorization: `Bearer ${API_KEY}`,
@@ -90,4 +98,4 @@ const getDiscoveryMovies = async () => {
     .catch((err) => console.error(err));
 };
 
-export { getConfiguration, getMovies, getMovieGenres };
+export { getConfiguration, getMovies, getMovieGenres, getDiscoveryMovies };
