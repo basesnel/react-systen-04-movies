@@ -31,7 +31,7 @@ const Main = () => {
   const fetchMovieGenres = async () => {
     try {
       const response = await getMovieGenres();
-      setMovieGenres(["All", ...response.genres]);
+      setMovieGenres([{ id: 1, name: "Popular" }, ...response.genres]);
     } catch (error) {
       console.error(error);
     }
