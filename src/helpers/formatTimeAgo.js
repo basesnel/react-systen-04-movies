@@ -11,13 +11,18 @@ const formatTimeAgo = (dateString) => {
     return `${Math.floor(secondPast / 60)}m ago`;
   }
 
-  if (secondPast <= 86400) {
+  if (secondPast < 86400) {
     return `${Math.floor(secondPast / 3600)}h ago`;
   }
 
-  if (secondPast > 86400) {
+  if (secondPast < 604800) {
     const day = Math.floor(secondPast / 86400);
     return day === 1 ? `${day} day ago` : `${day} days ago`;
+  }
+
+  if (secondPast >= 604800) {
+    const week = Math.floor(secondPast / 604800);
+    return week === 1 ? `${week} week ago` : `${week} weeks ago`;
   }
 };
 
