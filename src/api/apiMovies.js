@@ -55,4 +55,23 @@ const getMovies = async (page = 1) => {
     .catch(handleError);
 };
 
-export { getConfiguration, getMovies };
+const getGenres = async () => {
+  const options = {
+    url: `${API_BASE_URL}genre/movie/list`,
+    method: "GET",
+    params: {
+      language: "en",
+    },
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${API_KEY}`,
+    },
+  };
+
+  axios
+    .request(options)
+    .then((res) => console.log(res.data))
+    .catch((err) => console.error(err));
+};
+
+export { getConfiguration, getMovies, getGenres };
