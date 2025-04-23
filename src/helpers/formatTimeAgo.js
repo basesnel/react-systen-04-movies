@@ -20,9 +20,14 @@ const formatTimeAgo = (dateString) => {
     return day === 1 ? `${day} day ago` : `${day} days ago`;
   }
 
-  if (secondPast >= 604800) {
+  if (secondPast < 2629757) {
     const week = Math.floor(secondPast / 604800);
     return week === 1 ? `${week} week ago` : `${week} weeks ago`;
+  }
+
+  if (secondPast >= 2629757) {
+    const month = Math.floor(secondPast / 604800);
+    return month === 1 ? `${month} month ago` : `${month} months ago`;
   }
 };
 
