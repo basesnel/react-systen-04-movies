@@ -30,14 +30,14 @@ const Main = () => {
   const fetchMovieGenres = async () => {
     try {
       const response = await getMovieGenres();
-      // setMovieGenres(response.genres);
-      console.log(response);
+      setMovieGenres(["All", ...response.genres]);
+      // console.log(response.genres);
     } catch (error) {
       console.error(error);
     }
   };
 
-  // console.log(movieGenres);
+  console.log(movieGenres);
 
   useEffect(() => {
     fetchMovieGenres();
