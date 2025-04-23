@@ -12,6 +12,7 @@ const Main = () => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+  const [movieGenres, setMovieGenres] = useState([]);
   const totalPages = 10;
 
   const fetchMovies = async (currentPage) => {
@@ -29,11 +30,14 @@ const Main = () => {
   const fetchMovieGenres = async () => {
     try {
       const response = await getMovieGenres();
-      // console.log(response);
+      // setMovieGenres(response.genres);
+      console.log(response);
     } catch (error) {
       console.error(error);
     }
   };
+
+  // console.log(movieGenres);
 
   useEffect(() => {
     fetchMovieGenres();

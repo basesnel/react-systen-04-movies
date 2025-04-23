@@ -68,10 +68,10 @@ const getMovieGenres = async () => {
     },
   };
 
-  axios
+  return axios
     .request(options)
-    .then((res) => console.log(res.data))
-    .catch((err) => console.error(err));
+    .then((res) => res.data)
+    .catch(handleError);
 };
 
 export { getConfiguration, getMovies, getMovieGenres };
