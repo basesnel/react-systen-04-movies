@@ -13,6 +13,7 @@ const Main = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [movieGenres, setMovieGenres] = useState([]);
+  const [selectedMovieGenres, setSelectedMovieGenres] = useState("All");
   const totalPages = 10;
 
   const fetchMovies = async (currentPage) => {
@@ -31,7 +32,6 @@ const Main = () => {
     try {
       const response = await getMovieGenres();
       setMovieGenres(["All", ...response.genres]);
-      // console.log(response.genres);
     } catch (error) {
       console.error(error);
     }
