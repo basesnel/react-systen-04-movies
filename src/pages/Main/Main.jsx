@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { getMovies } from "../../api/apiMovies";
+import { getMovies, getMovieGenres } from "../../api/apiMovies";
 import MoviesBanner from "../../components/MoviesBanner/MoviesBanner";
 import MoviesList from "../../components/MoviesList/MoviesList";
 import Pagination from "../../components/Pagination/Pagination";
@@ -25,6 +25,19 @@ const Main = () => {
       console.error(error);
     }
   };
+
+  const fetchMovieGenres = async () => {
+    try {
+      const response = await getMovieGenres();
+      // console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchMovieGenres();
+  }, []);
 
   useEffect(() => {
     fetchMovies(currentPage);

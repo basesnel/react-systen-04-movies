@@ -55,7 +55,7 @@ const getMovies = async (page = 1) => {
     .catch(handleError);
 };
 
-const getGenres = async () => {
+const getMovieGenres = async () => {
   const options = {
     url: `${API_BASE_URL}genre/movie/list`,
     method: "GET",
@@ -74,4 +74,4 @@ const getGenres = async () => {
     .catch((err) => console.error(err));
 };
 
-export { getConfiguration, getMovies, getGenres };
+export { getConfiguration, getMovies, getMovieGenres };
