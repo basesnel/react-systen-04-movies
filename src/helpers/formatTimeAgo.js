@@ -26,7 +26,7 @@ const formatTimeAgo = (dateString) => {
   }
 
   if (secondPast < 31557600) {
-    const month = Math.floor(secondPast / 604800);
+    const month = Math.floor(secondPast / 2629757);
     return month === 1 ? `${month} month ago` : `${month} months ago`;
   }
 
