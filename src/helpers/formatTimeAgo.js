@@ -56,14 +56,18 @@ const formatTimeAgo = (dateString) => {
     return month > 0 ? `${month} months ago` : `In ${Math.abs(month)} months`;
   }
 
-  if (secondsDiff < secondsInTwoYear) {
+  if (Math.abs(secondsDiff) < secondsInTwoYear) {
     const year = Math.floor(secondsDiff / secondsInYear);
     const month = Math.floor((secondsDiff % secondsInYear) / secondsInMonth);
 
-    if (!month) return `${year} year ago`;
-    if (month === 1) return `${year} year and month ago`;
+    if (!month) return year > 0 ? "a year ago" : "in a year";
 
-    return `${year} year and ${month} months ago`;
+    if (Math.abs(month) === 1)
+      return year > 0 ? "a year and a month ago" : "in a year and a month";
+
+    return year > 0
+      ? `a year and ${month} months ago`
+      : `in a year and ${Math.abs(month)} months`;
   }
 
   if (secondsDiff >= secondsInTwoYear) {
