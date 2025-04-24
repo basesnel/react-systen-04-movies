@@ -12,7 +12,9 @@ const formatTimeAgo = (dateString) => {
   const secondsInTwoYear = secondsInYear * 2;
 
   if (secondsDiff < secondsInMinute) {
-    return `${Math.floor(secondsDiff)}s ago`;
+    return secondsDiff >= 0
+      ? `${Math.floor(secondsDiff)}s ago`
+      : `In ${Math.abs(Math.floor(secondsDiff))}s`;
   }
 
   if (secondsDiff < secondsInHour) {
