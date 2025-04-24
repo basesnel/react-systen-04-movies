@@ -33,18 +33,23 @@ const formatTimeAgo = (dateString) => {
     const day = Math.floor(secondsDiff / secondsInDay);
 
     if (day === 1)
-      return day >= 0 ? `${day} day ago` : `In ${Math.abs(day)} day`;
+      return day > 0 ? `${day} day ago` : `In ${Math.abs(day)} day`;
 
-    return day >= 0 ? `${day} days ago` : `In ${Math.abs(day)} days`;
+    return day > 0 ? `${day} days ago` : `In ${Math.abs(day)} days`;
   }
 
-  if (secondsDiff < secondsInMonth) {
+  if (Math.abs(secondsDiff) < secondsInMonth) {
     const week = Math.floor(secondsDiff / secondsInWeek);
-    return week === 1 ? `${week} week ago` : `${week} weeks ago`;
+
+    if (week === 1)
+      return week > 0 ? `${week} week ago` : `In ${Math.abs(week)} week`;
+
+    return week > 0 ? `${week} weeks ago` : `In ${Math.abs(week)} weeks`;
   }
 
   if (secondsDiff < secondsInYear) {
     const month = Math.floor(secondsDiff / secondsInMonth);
+
     return month === 1 ? `${month} month ago` : `${month} months ago`;
   }
 
