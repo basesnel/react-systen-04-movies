@@ -30,58 +30,61 @@ const formatTimeAgo = (dateString) => {
 
     return minutes > 0
       ? `${Math.floor(minutes)}m ago`
-      : `${Math.abs(Math.floor(minutes))}m ago`;
+      : `in ${Math.abs(Math.floor(minutes))}m`;
   }
 
   if (Math.abs(secondsDiff) < secondsInDay) {
-    const hour = Math.floor(secondsDiff / secondsInHour);
+    const hours = Math.floor(secondsDiff / secondsInHour);
 
-    if (Math.abs(hour) === 1) return hour > 0 ? "a hour ago" : "in a hour";
+    if (Math.abs(hours) === 1) return hours > 0 ? "a hour ago" : "in a hour";
 
-    return hour > 0 ? `${hour}h ago` : `${Math.abs(hour)}h ago`;
+    return hours > 0 ? `${hours}h ago` : `in ${Math.abs(hours)}h`;
   }
 
   if (Math.abs(secondsDiff) < secondsInWeek) {
-    const day = Math.floor(secondsDiff / secondsInDay);
+    const days = Math.floor(secondsDiff / secondsInDay);
 
-    if (Math.abs(day) === 1) return day > 0 ? "a day ago" : "in a day";
+    if (Math.abs(days) === 1) return days > 0 ? "a day ago" : "in a day";
 
-    return day > 0 ? `${day} days ago` : `In ${Math.abs(day)} days`;
+    return days > 0 ? `${days} days ago` : `in ${Math.abs(days)} days`;
   }
 
   if (Math.abs(secondsDiff) < secondsInMonth) {
-    const week = Math.floor(secondsDiff / secondsInWeek);
+    const weeks = Math.floor(secondsDiff / secondsInWeek);
 
-    if (Math.abs(week) === 1) return week > 0 ? "a week ago" : "in a week";
+    if (Math.abs(weeks) === 1) return weeks > 0 ? "a week ago" : "in a week";
 
-    return week > 0 ? `${week} weeks ago` : `In ${Math.abs(week)} weeks`;
+    return weeks > 0 ? `${weeks} weeks ago` : `in ${Math.abs(weeks)} weeks`;
   }
 
   if (Math.abs(secondsDiff) < secondsInYear) {
-    const month = Math.floor(secondsDiff / secondsInMonth);
+    const months = Math.floor(secondsDiff / secondsInMonth);
 
-    if (Math.abs(month) === 1) return month > 0 ? "a month ago" : "in a month";
+    if (Math.abs(months) === 1)
+      return months > 0 ? "a month ago" : "in a month";
 
-    return month > 0 ? `${month} months ago` : `in ${Math.abs(month)} months`;
+    return months > 0
+      ? `${months} months ago`
+      : `in ${Math.abs(months)} months`;
   }
 
   if (Math.abs(secondsDiff) < secondsInTwoYear) {
     const year = Math.floor(secondsDiff / secondsInYear);
-    const month = Math.floor((secondsDiff % secondsInYear) / secondsInMonth);
+    const months = Math.floor((secondsDiff % secondsInYear) / secondsInMonth);
 
-    if (!month) return year > 0 ? "a year ago" : "in a year";
+    if (!months) return year > 0 ? "a year ago" : "in a year";
 
-    if (Math.abs(month) === 1)
+    if (Math.abs(months) === 1)
       return year > 0 ? "a year and a month ago" : "in a year and a month";
 
     return year > 0
-      ? `a year and ${month} months ago`
-      : `in a year and ${Math.abs(month)} months`;
+      ? `a year and ${months} months ago`
+      : `in a year and ${Math.abs(months)} months`;
   }
 
   if (secondsDiff >= secondsInTwoYear) {
-    const year = Math.floor(secondsDiff / secondsInYear);
-    return year === 1 ? `${year} year ago` : `${year} years ago`;
+    const years = Math.floor(secondsDiff / secondsInYear);
+    return years === 1 ? `${years} year ago` : `${years} years ago`;
   }
 };
 
