@@ -30,7 +30,17 @@ const formatTimeAgo = (dateString) => {
     return month === 1 ? `${month} month ago` : `${month} months ago`;
   }
 
-  if (secondPast >= 31557600) {
+  if (secondPast < 63115200) {
+    const year = Math.floor(secondPast / 31557600);
+    const month = Math.floor((secondPast % 31557600) / 2629757);
+    return month === 0
+      ? `${year} year ago`
+      : month === 1
+      ? `${year} year and month ago`
+      : `${year} year and ${month} months ago`;
+  }
+
+  if (secondPast >= 63115200) {
     const year = Math.floor(secondPast / 31557600);
     return year === 1 ? `${year} year ago` : `${year} years ago`;
   }
