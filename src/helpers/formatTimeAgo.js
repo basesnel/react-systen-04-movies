@@ -84,7 +84,8 @@ const formatTimeAgo = (dateString) => {
 
   if (secondsDiff >= secondsInTwoYear) {
     const years = Math.floor(secondsDiff / secondsInYear);
-    return years === 1 ? `${years} year ago` : `${years} years ago`;
+
+    return years > 0 ? `${years} years ago` : `in ${years} years`;
   }
 };
 
