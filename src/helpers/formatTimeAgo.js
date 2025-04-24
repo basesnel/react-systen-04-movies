@@ -3,36 +3,44 @@ const formatTimeAgo = (dateString) => {
   const date = new Date(dateString);
   const secondPast = (now.getTime() - date.getTime()) / 1000;
 
-  if (secondPast < 60) {
+  const secondsInMinute = 60;
+  const secondsInHour = secondsInMinute * 60;
+  const secondsInDay = secondsInHour * 24;
+  const secondsInWeek = secondsInDay * 7;
+  const secondsInMonth = Math.round(secondsInDay * 30.437);
+  const secondsInYear = Math.round(secondsInDay * 365.25);
+  const secondsInTwoYear = secondsInYear * 2;
+
+  if (secondPast < secondsInMinute) {
     return `${Math.floor(secondPast)}s ago`;
   }
 
-  if (secondPast < 3600) {
-    return `${Math.floor(secondPast / 60)}m ago`;
+  if (secondPast < secondsInHour) {
+    return `${Math.floor(secondPast / secondsInMinute)}m ago`;
   }
 
-  if (secondPast < 86400) {
-    return `${Math.floor(secondPast / 3600)}h ago`;
+  if (secondPast < secondsInDay) {
+    return `${Math.floor(secondPast / secondsInHour)}h ago`;
   }
 
-  if (secondPast < 604800) {
-    const day = Math.floor(secondPast / 86400);
+  if (secondPast < secondsInWeek) {
+    const day = Math.floor(secondPast / secondsInDay);
     return day === 1 ? `${day} day ago` : `${day} days ago`;
   }
 
-  if (secondPast < 2629757) {
-    const week = Math.floor(secondPast / 604800);
+  if (secondPast < secondsInMonth) {
+    const week = Math.floor(secondPast / secondsInWeek);
     return week === 1 ? `${week} week ago` : `${week} weeks ago`;
   }
 
-  if (secondPast < 31557600) {
-    const month = Math.floor(secondPast / 2629757);
+  if (secondPast < secondsInYear) {
+    const month = Math.floor(secondPast / secondsInMonth);
     return month === 1 ? `${month} month ago` : `${month} months ago`;
   }
 
-  if (secondPast < 63115200) {
-    const year = Math.floor(secondPast / 31557600);
-    const month = Math.floor((secondPast % 31557600) / 2629757);
+  if (secondPast < secondsInTwoYear) {
+    const year = Math.floor(secondPast / secondsInYear);
+    const month = Math.floor((secondPast % secondsInYear) / secondsInMonth);
 
     if (!month) return `${year} year ago`;
     if (month === 1) return `${year} year and month ago`;
@@ -40,8 +48,8 @@ const formatTimeAgo = (dateString) => {
     return `${year} year and ${month} months ago`;
   }
 
-  if (secondPast >= 63115200) {
-    const year = Math.floor(secondPast / 31557600);
+  if (secondPast >= secondsInTwoYear) {
+    const year = Math.floor(secondPast / secondsInYear);
     return year === 1 ? `${year} year ago` : `${year} years ago`;
   }
 };
