@@ -4,6 +4,10 @@ import Image from "../Image/Image";
 import styles from "./styles.module.css";
 
 const MoviesBanner = ({ item }) => {
+  const nowTime =
+    "Fri Apr 25 2025 05:00:00 GMT+0300 (Eastern European Summer Time)";
+  const now = new Date(nowTime);
+
   const threeYearsAgo = "2022-04-25";
   const twoYearsAgo = "2023-04-25";
   const oneYearAndMonths = "2023-06-20";
@@ -14,6 +18,8 @@ const MoviesBanner = ({ item }) => {
   const month = "2025-03-26";
   const weeks = "2025-03-27";
   const weekAndDays = "2025-04-16";
+  const days = "2025-04-20";
+  const dayAndHours = "2025-04-24";
 
   return (
     <div className={styles.banner}>
@@ -34,6 +40,8 @@ const MoviesBanner = ({ item }) => {
       <p>{`${month} (${formatTimeAgo(month)})`}</p>
       <p>{`${weeks} (${formatTimeAgo(weeks)})`}</p>
       <p>{`${weekAndDays} (${formatTimeAgo(weekAndDays)})`}</p>
+      <p>{`${days} (${formatTimeAgo(days)})`}</p>
+      <p>{`${dayAndHours} (${formatTimeAgo(dayAndHours, now)})`}</p>
     </div>
   );
 };
