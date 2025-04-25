@@ -68,16 +68,30 @@ const formatTimeAgo = (dateString) => {
   if (Math.abs(secondsDiff) < secondsInMonth) {
     const weeks = Math.floor(secondsDiff / secondsInWeek);
 
-    if (Math.abs(weeks) === 1) return weeks > 0 ? "a week ago" : "in a week";
+    // if (Math.abs(weeks) === 1) return weeks > 0 ? "a week ago" : "in a week";
 
     return weeks > 0 ? `${weeks} weeks ago` : `in ${Math.abs(weeks)} weeks`;
+  }
+
+  if (Math.abs(secondsDiff) < secondsInTwoMonths) {
+    const month = Math.floor(secondsDiff / secondsInMonth);
+    const days = Math.floor((secondsDiff % secondsInMonth) / secondsInDay);
+
+    if (!days) return month > 0 ? "a month ago" : "in a month";
+
+    if (Math.abs(days) === 1)
+      return month > 0 ? "a month and a day ago" : "in a month and a day";
+
+    return month > 0
+      ? `a month and ${days} days ago`
+      : `in a month and ${Math.abs(days)} days`;
   }
 
   if (Math.abs(secondsDiff) < secondsInYear) {
     const months = Math.floor(secondsDiff / secondsInMonth);
 
-    if (Math.abs(months) === 1)
-      return months > 0 ? "a month ago" : "in a month";
+    // if (Math.abs(months) === 1)
+    //   return months > 0 ? "a month ago" : "in a month";
 
     return months > 0
       ? `${months} months ago`
