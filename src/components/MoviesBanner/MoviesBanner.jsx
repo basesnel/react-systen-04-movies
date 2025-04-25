@@ -20,6 +20,7 @@ const MoviesBanner = ({ item }) => {
   const weekAndDays = "2025-04-16";
   const days = "2025-04-20";
   const dayAndHours = "2025-04-24";
+  const hours = "2025-04-24 04:00:00";
 
   return (
     <div className={styles.banner}>
@@ -42,6 +43,7 @@ const MoviesBanner = ({ item }) => {
       <p>{`${weekAndDays} (${formatTimeAgo(weekAndDays)})`}</p>
       <p>{`${days} (${formatTimeAgo(days)})`}</p>
       <p>{`${dayAndHours} (${formatTimeAgo(dayAndHours, now)})`}</p>
+      <p>{`${hours} (${formatTimeAgo(hours, now)})`}</p>
     </div>
   );
 };
