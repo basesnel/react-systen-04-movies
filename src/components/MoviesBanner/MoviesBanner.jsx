@@ -8,6 +8,10 @@ const MoviesBanner = ({ item }) => {
   const twoYearsAgo = "2023-04-25";
   const oneYearAndMonths = "2023-06-20";
   const oneYearAndMonth = "2024-03-20";
+  const oneYear = "2024-04-20";
+  const months = "2024-05-30";
+  const month = "2025-03-25";
+  const weeks = "2025-03-27";
 
   return (
     <div className={styles.banner}>
@@ -22,6 +26,10 @@ const MoviesBanner = ({ item }) => {
       <p>{`${twoYearsAgo} (${formatTimeAgo(twoYearsAgo)})`}</p>
       <p>{`${oneYearAndMonths} (${formatTimeAgo(oneYearAndMonths)})`}</p>
       <p>{`${oneYearAndMonth} (${formatTimeAgo(oneYearAndMonth)})`}</p>
+      <p>{`${oneYear} (${formatTimeAgo(oneYear)})`}</p>
+      <p>{`${months} (${formatTimeAgo(months)})`}</p>
+      <p>{`${month} (${formatTimeAgo(month)})`}</p>
+      <p>{`${weeks} (${formatTimeAgo(weeks)})`}</p>
     </div>
   );
 };
