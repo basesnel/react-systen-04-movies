@@ -23,6 +23,7 @@ const MoviesBanner = ({ item }) => {
   const hours = "2025-04-24 03:00:00";
   const hourAndMinutes = "2025-04-25 02:00:00";
   const minuteAndSeconds = "2025-04-25 04:59:00";
+  const seconds = "2025-04-25 04:59:59";
 
   return (
     <div className={styles.banner}>
@@ -48,6 +49,7 @@ const MoviesBanner = ({ item }) => {
       <p>{`${hours} (${formatTimeAgo(hours, now)})`}</p>
       <p>{`${hourAndMinutes} (${formatTimeAgo(hourAndMinutes, now)})`}</p>
       <p>{`${minuteAndSeconds} (${formatTimeAgo(minuteAndSeconds, now)})`}</p>
+      <p>{`${seconds} (${formatTimeAgo(seconds, now)})`}</p>
     </div>
   );
 };
