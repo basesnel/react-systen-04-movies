@@ -12,6 +12,7 @@ const MoviesBanner = ({ item }) => {
   const months = "2024-05-30";
   const month = "2025-03-25";
   const weeks = "2025-03-27";
+  const week = "2025-04-19";
 
   return (
     <div className={styles.banner}>
@@ -30,6 +31,7 @@ const MoviesBanner = ({ item }) => {
       <p>{`${months} (${formatTimeAgo(months)})`}</p>
       <p>{`${month} (${formatTimeAgo(month)})`}</p>
       <p>{`${weeks} (${formatTimeAgo(weeks)})`}</p>
+      <p>{`${week} (${formatTimeAgo(week)})`}</p>
     </div>
   );
 };

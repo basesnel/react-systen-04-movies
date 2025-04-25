@@ -7,9 +7,11 @@ const formatTimeAgo = (dateString) => {
   const secondsInHour = secondsInMinute * 60;
   const secondsInDay = secondsInHour * 24;
   const secondsInWeek = secondsInDay * 7;
+  const secondsInTwoWeeks = secondsInWeek * 2;
   const secondsInMonth = Math.round(secondsInDay * 30.437);
+  const secondsInTwoMonths = secondsInMonth * 2;
   const secondsInYear = Math.round(secondsInDay * 365.25);
-  const secondsInTwoYear = secondsInYear * 2;
+  const secondsInTwoYears = secondsInYear * 2;
 
   if (Math.abs(secondsDiff) < secondsInMinute) {
     const seconds = Math.floor(secondsDiff);
@@ -49,6 +51,20 @@ const formatTimeAgo = (dateString) => {
     return days > 0 ? `${days} days ago` : `in ${Math.abs(days)} days`;
   }
 
+  if (Math.abs(secondsDiff) < secondsInTwoWeeks) {
+    const week = Math.floor(secondsDiff / secondsInWeek);
+    const days = Math.floor((secondsDiff % secondsInWeek) / secondsInDay);
+
+    if (!days) return week > 0 ? "a week ago" : "in a week";
+
+    if (Math.abs(days) === 1)
+      return week > 0 ? "a week and a day ago" : "in a week and a day";
+
+    return week > 0
+      ? `a week and ${days} days ago`
+      : `in a week and ${Math.abs(days)} days`;
+  }
+
   if (Math.abs(secondsDiff) < secondsInMonth) {
     const weeks = Math.floor(secondsDiff / secondsInWeek);
 
@@ -68,7 +84,7 @@ const formatTimeAgo = (dateString) => {
       : `in ${Math.abs(months)} months`;
   }
 
-  if (Math.abs(secondsDiff) < secondsInTwoYear) {
+  if (Math.abs(secondsDiff) < secondsInTwoYears) {
     const year = Math.floor(secondsDiff / secondsInYear);
     const months = Math.floor((secondsDiff % secondsInYear) / secondsInMonth);
 
@@ -82,7 +98,7 @@ const formatTimeAgo = (dateString) => {
       : `in a year and ${Math.abs(months)} months`;
   }
 
-  if (secondsDiff >= secondsInTwoYear) {
+  if (secondsDiff >= secondsInTwoYears) {
     const years = Math.floor(secondsDiff / secondsInYear);
 
     return years > 0 ? `${years} years ago` : `in ${years} years`;
