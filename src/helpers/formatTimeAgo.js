@@ -5,6 +5,7 @@ const formatTimeAgo = (dateString, now = new Date()) => {
 
   const secondsInMinute = 60;
   const secondsInHour = secondsInMinute * 60;
+  const secondsInTwoHours = secondsInHour * 2;
   const secondsInDay = secondsInHour * 24;
   const secondsInTwoDays = secondsInDay * 2;
   const secondsInWeek = secondsInDay * 7;
@@ -36,10 +37,24 @@ const formatTimeAgo = (dateString, now = new Date()) => {
       : `in ${Math.abs(Math.floor(minutes))}m`;
   }
 
+  if (Math.abs(secondsDiff) < secondsInTwoHours) {
+    const hour = Math.floor(secondsDiff / secondsInHour);
+    const minutes = Math.floor((secondsDiff % secondsInHour) / secondsInMinute);
+
+    if (!minutes) return hour > 0 ? "a hour ago" : "in a hour";
+
+    if (Math.abs(minutes) === 1)
+      return hour > 0 ? "a hour and a minute ago" : "in a hour and a minute";
+
+    return hour > 0
+      ? `a hour and ${minutes} minutes ago`
+      : `in a hour and ${Math.abs(minutes)} minutes`;
+  }
+
   if (Math.abs(secondsDiff) < secondsInDay) {
     const hours = Math.floor(secondsDiff / secondsInHour);
 
-    if (Math.abs(hours) === 1) return hours > 0 ? "a hour ago" : "in a hour";
+    // if (Math.abs(hours) === 1) return hours > 0 ? "a hour ago" : "in a hour";
 
     return hours > 0 ? `${hours}h ago` : `in ${Math.abs(hours)}h`;
   }
