@@ -88,7 +88,6 @@ const formatTimeDiff = (dateString, now = new Date()) => {
   }
 
   if (fullSeconds < secondsInTwoWeeks) {
-    // const week = Math.floor(secondsDiff / secondsInWeek);
     const days = Math.floor((fullSeconds % secondsInWeek) / secondsInDay);
 
     if (!days) return secondsDiff > 0 ? "a week ago" : "in a week";
@@ -101,10 +100,10 @@ const formatTimeDiff = (dateString, now = new Date()) => {
       : `in a week and ${days} days`;
   }
 
-  if (Math.abs(secondsDiff) < secondsInMonth) {
-    const weeks = Math.floor(secondsDiff / secondsInWeek);
+  if (fullSeconds < secondsInMonth) {
+    const weeks = Math.floor(fullSeconds / secondsInWeek);
 
-    return weeks > 0 ? `${weeks} weeks ago` : `in ${Math.abs(weeks)} weeks`;
+    return secondsDiff > 0 ? `${weeks} weeks ago` : `in ${weeks} weeks`;
   }
 
   if (Math.abs(secondsDiff) < secondsInTwoMonths) {
