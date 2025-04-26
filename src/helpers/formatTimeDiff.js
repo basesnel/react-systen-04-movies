@@ -1,4 +1,4 @@
-const formatTimeAgo = (dateString, now = new Date()) => {
+const formatTimeDiff = (dateString, now = new Date()) => {
   // const now = new Date();
   const date = new Date(dateString);
   const secondsDiff = (now.getTime() - date.getTime()) / 1000;
@@ -158,4 +158,4 @@ const formatTimeAgo = (dateString, now = new Date()) => {
   }
 };
 
-export default formatTimeAgo;
+export default formatTimeDiff;

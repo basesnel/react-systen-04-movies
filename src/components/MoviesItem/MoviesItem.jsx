@@ -1,4 +1,4 @@
-import formatTimeAgo from "../../helpers/formatTimeAgo";
+import formatTimeDiff from "../../helpers/formatTimeDiff";
 
 import styles from "./styles.module.css";
 
@@ -14,7 +14,7 @@ const MoviesItem = ({ item }) => {
       <div className={styles.info}>
         <h3 className={styles.title}>{item.title}</h3>
         <p className={styles.extra}>
-          {`Release: ${item.release_date} (${formatTimeAgo(
+          {`Release: ${item.release_date} (${formatTimeDiff(
             item.release_date
           )}) | ${item.vote_average}`}
         </p>

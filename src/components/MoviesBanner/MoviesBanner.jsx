@@ -1,4 +1,4 @@
-import formatTimeAgo from "../../helpers/formatTimeAgo";
+import formatTimeDiff from "../../helpers/formatTimeDiff";
 import Image from "../Image/Image";
 
 import styles from "./styles.module.css";
@@ -30,26 +30,26 @@ const MoviesBanner = ({ item }) => {
       <Image image={`https://image.tmdb.org/t/p/w300${item?.poster_path}`} />
       <h3 className={styles.title}>{item.title}</h3>
       <p className={styles.extra}>
-        {`Release: ${item.release_date} (${formatTimeAgo(
+        {`Release: ${item.release_date} (${formatTimeDiff(
           item.release_date
         )}) | ${item.vote_average}`}
       </p>
-      <p>{`${threeYearsAgo} (${formatTimeAgo(threeYearsAgo)})`}</p>
-      <p>{`${twoYearsAgo} (${formatTimeAgo(twoYearsAgo)})`}</p>
-      <p>{`${oneYearAndMonths} (${formatTimeAgo(oneYearAndMonths)})`}</p>
-      <p>{`${oneYearAndMonth} (${formatTimeAgo(oneYearAndMonth)})`}</p>
-      <p>{`${oneYear} (${formatTimeAgo(oneYear)})`}</p>
-      <p>{`${months} (${formatTimeAgo(months)})`}</p>
-      <p>{`${monthAndDays} (${formatTimeAgo(monthAndDays)})`}</p>
-      <p>{`${month} (${formatTimeAgo(month)})`}</p>
-      <p>{`${weeks} (${formatTimeAgo(weeks)})`}</p>
-      <p>{`${weekAndDays} (${formatTimeAgo(weekAndDays)})`}</p>
-      <p>{`${days} (${formatTimeAgo(days)})`}</p>
-      <p>{`${dayAndHours} (${formatTimeAgo(dayAndHours, now)})`}</p>
-      <p>{`${hours} (${formatTimeAgo(hours, now)})`}</p>
-      <p>{`${hourAndMinutes} (${formatTimeAgo(hourAndMinutes, now)})`}</p>
-      <p>{`${minuteAndSeconds} (${formatTimeAgo(minuteAndSeconds, now)})`}</p>
-      <p>{`${seconds} (${formatTimeAgo(seconds, now)})`}</p>
+      <p>{`${threeYearsAgo} (${formatTimeDiff(threeYearsAgo)})`}</p>
+      <p>{`${twoYearsAgo} (${formatTimeDiff(twoYearsAgo)})`}</p>
+      <p>{`${oneYearAndMonths} (${formatTimeDiff(oneYearAndMonths)})`}</p>
+      <p>{`${oneYearAndMonth} (${formatTimeDiff(oneYearAndMonth)})`}</p>
+      <p>{`${oneYear} (${formatTimeDiff(oneYear)})`}</p>
+      <p>{`${months} (${formatTimeDiff(months)})`}</p>
+      <p>{`${monthAndDays} (${formatTimeDiff(monthAndDays)})`}</p>
+      <p>{`${month} (${formatTimeDiff(month)})`}</p>
+      <p>{`${weeks} (${formatTimeDiff(weeks)})`}</p>
+      <p>{`${weekAndDays} (${formatTimeDiff(weekAndDays)})`}</p>
+      <p>{`${days} (${formatTimeDiff(days)})`}</p>
+      <p>{`${dayAndHours} (${formatTimeDiff(dayAndHours, now)})`}</p>
+      <p>{`${hours} (${formatTimeDiff(hours, now)})`}</p>
+      <p>{`${hourAndMinutes} (${formatTimeDiff(hourAndMinutes, now)})`}</p>
+      <p>{`${minuteAndSeconds} (${formatTimeDiff(minuteAndSeconds, now)})`}</p>
+      <p>{`${seconds} (${formatTimeDiff(seconds, now)})`}</p>
     </div>
   );
 };
