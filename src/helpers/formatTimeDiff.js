@@ -24,8 +24,8 @@ const formatTimeDiff = (dateString, now = new Date()) => {
       return seconds > 0 ? "a second ago" : "in a second";
 
     return seconds > 0
-      ? `${Math.floor(seconds)}s ago`
-      : `in ${Math.abs(Math.floor(seconds))}s`;
+      ? `${Math.floor(seconds)} seconds ago`
+      : `in ${Math.abs(Math.floor(seconds))} seconds`;
   }
 
   if (Math.abs(secondsDiff) < secondsInTwoMinutes) {
@@ -45,14 +45,11 @@ const formatTimeDiff = (dateString, now = new Date()) => {
   }
 
   if (Math.abs(secondsDiff) < secondsInHour) {
-    const minutes = Math.floor(secondsDiff / secondsInMinute);
+    const minutes = Math.floor(Math.abs(secondsDiff) / secondsInMinute);
 
-    // if (Math.abs(minutes) === 1)
-    //   return minutes > 0 ? "a minute ago" : "in a minute";
-
-    return minutes > 0
-      ? `${Math.floor(minutes)}m ago`
-      : `in ${Math.abs(Math.floor(minutes))}m`;
+    return secondsDiff > 0
+      ? `${Math.floor(minutes)} minutes ago`
+      : `in ${Math.abs(Math.floor(minutes))} minutes`;
   }
 
   if (Math.abs(secondsDiff) < secondsInTwoHours) {
