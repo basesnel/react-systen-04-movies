@@ -62,10 +62,10 @@ const formatTimeDiff = (dateString, now = new Date()) => {
       : `in a hour and ${minutes} minutes`;
   }
 
-  if (Math.abs(secondsDiff) < secondsInDay) {
-    const hours = Math.floor(secondsDiff / secondsInHour);
+  if (fullSeconds < secondsInDay) {
+    const hours = Math.floor(fullSeconds / secondsInHour);
 
-    return hours > 0 ? `${hours}h ago` : `in ${Math.abs(hours)}h`;
+    return secondsDiff > 0 ? `${hours} hours ago` : `in ${hours} hours`;
   }
 
   if (Math.abs(secondsDiff) < secondsInTwoDays) {
