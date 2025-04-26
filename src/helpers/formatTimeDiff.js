@@ -2,6 +2,7 @@ const formatTimeDiff = (dateString, now = new Date()) => {
   // const now = new Date();
   const date = new Date(dateString);
   const secondsDiff = (now.getTime() - date.getTime()) / 1000;
+  const fullSeconds = Math.floor(Math.abs(secondsDiff));
 
   const oneSecond = 1;
   const secondsInMinute = 60;
@@ -17,23 +18,19 @@ const formatTimeDiff = (dateString, now = new Date()) => {
   const secondsInYear = Math.round(secondsInDay * 365.25);
   const secondsInTwoYears = secondsInYear * 2;
 
-  if (Math.abs(secondsDiff) < secondsInMinute) {
-    // console.log(secondsDiff);
-    const seconds = Math.floor(Math.abs(secondsDiff));
-    // console.log(seconds);
+  if (fullSeconds < secondsInMinute) {
+    const seconds = fullSeconds;
 
     if (seconds === 1) return secondsDiff > 0 ? "a second ago" : "in a second";
 
     return secondsDiff > 0 ? `${seconds} seconds ago` : `in ${seconds} seconds`;
   }
 
-  if (Math.abs(secondsDiff) < secondsInTwoMinutes) {
-    const minute = Math.floor(Math.abs(secondsDiff) / secondsInMinute);
-    const seconds = Math.floor(
-      (Math.abs(secondsDiff) % secondsInMinute) / oneSecond
-    );
+  if (fullSeconds < secondsInTwoMinutes) {
+    // const minute = Math.floor(fullSeconds / secondsInMinute);
+    const seconds = Math.floor((fullSeconds % secondsInMinute) / oneSecond);
 
-    if (!seconds) return minute > 0 ? "a minute ago" : "in a minute";
+    if (!seconds) return secondsDiff > 0 ? "a minute ago" : "in a minute";
 
     if (Math.abs(seconds) === 1)
       return secondsDiff > 0

@@ -22,9 +22,8 @@ const MoviesBanner = ({ item }) => {
   const dayAndHours = "2025-04-24";
   const hours = "2025-04-24 03:00:00";
   const hourAndMinutes = "2025-04-25 02:00:00";
-  const minuteAndSeconds = "2025-04-25 05:01:03";
-  const seconds = "2025-04-25 05:00:58";
-  // const seconds = "2025-04-25 05:00:00";
+  const minuteAndSeconds = "2025-04-25 05:01:21";
+  const seconds = "2025-04-25 05:00:11";
 
   return (
     <div className={styles.banner}>
