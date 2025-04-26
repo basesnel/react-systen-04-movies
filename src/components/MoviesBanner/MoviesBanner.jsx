@@ -22,6 +22,7 @@ const MoviesBanner = ({ item }) => {
   const dayAndHours = "2025-04-24";
   const hours = "2025-04-24 03:00:00";
   const hourAndMinutes = "2025-04-25 02:00:00";
+  const minutes = "2025-04-25 04:01:00";
   const minuteAndSeconds = "2025-04-25 05:01:21";
   const seconds = "2025-04-25 05:00:11";
 
@@ -48,6 +49,7 @@ const MoviesBanner = ({ item }) => {
       <p>{`${dayAndHours} (${formatTimeDiff(dayAndHours, now)})`}</p>
       <p>{`${hours} (${formatTimeDiff(hours, now)})`}</p>
       <p>{`${hourAndMinutes} (${formatTimeDiff(hourAndMinutes, now)})`}</p>
+      <p>{`${minutes} (${formatTimeDiff(minutes, now)})`}</p>
       <p>{`${minuteAndSeconds} (${formatTimeDiff(minuteAndSeconds, now)})`}</p>
       <p>{`${seconds} (${formatTimeDiff(seconds, now)})`}</p>
     </div>
