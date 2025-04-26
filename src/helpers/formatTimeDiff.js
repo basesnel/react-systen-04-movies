@@ -68,18 +68,17 @@ const formatTimeDiff = (dateString, now = new Date()) => {
     return secondsDiff > 0 ? `${hours} hours ago` : `in ${hours} hours`;
   }
 
-  if (Math.abs(secondsDiff) < secondsInTwoDays) {
-    const day = Math.floor(secondsDiff / secondsInDay);
-    const hours = Math.floor((secondsDiff % secondsInDay) / secondsInHour);
+  if (fullSeconds < secondsInTwoDays) {
+    const hours = Math.floor((fullSeconds % secondsInDay) / secondsInHour);
 
-    if (!hours) return day > 0 ? "a day ago" : "in a day";
+    if (!hours) return secondsDiff > 0 ? "a day ago" : "in a day";
 
-    if (Math.abs(hours) === 1)
-      return day > 0 ? "a day and a hour ago" : "in a day and a hour";
+    if (hours === 1)
+      return secondsDiff > 0 ? "a day and a hour ago" : "in a day and a hour";
 
-    return day > 0
+    return secondsDiff > 0
       ? `a day and ${hours} hours ago`
-      : `in a day and ${Math.abs(hours)} hours`;
+      : `in a day and ${hours} hours`;
   }
 
   if (Math.abs(secondsDiff) < secondsInWeek) {
