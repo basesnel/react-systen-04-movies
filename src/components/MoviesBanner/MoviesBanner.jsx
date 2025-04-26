@@ -5,7 +5,7 @@ import styles from "./styles.module.css";
 
 const MoviesBanner = ({ item }) => {
   const nowTime =
-    "Fri Apr 25 2025 05:00:00 GMT+0300 (Eastern European Summer Time)";
+    "Fri Apr 25 2025 00:00:00 GMT+0300 (Eastern European Summer Time)";
   const now = new Date(nowTime);
 
   const threeYearsAgo = "2022-04-25";
@@ -17,7 +17,7 @@ const MoviesBanner = ({ item }) => {
   const monthAndDays = "2025-03-23";
   const month = "2025-03-26";
   const weeks = "2025-03-27";
-  const weekAndDays = "2025-04-16";
+  const weekAndDays = "2025-05-08";
   const days = "2025-05-03";
   const zero = "2025-04-25 05:00:00";
   const dayAndHours = "2025-04-26 06:00:00";
