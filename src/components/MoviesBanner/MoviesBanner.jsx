@@ -18,7 +18,8 @@ const MoviesBanner = ({ item }) => {
   const month = "2025-03-26";
   const weeks = "2025-03-27";
   const weekAndDays = "2025-04-16";
-  const days = "2025-04-20";
+  const days = "2025-05-03";
+  const zero = "2025-04-25 05:00:00";
   const dayAndHours = "2025-04-26 06:00:00";
   const hours = "2025-04-25 10:00:00";
   const hourAndMinutes = "2025-04-25 06:02:10";
@@ -35,17 +36,18 @@ const MoviesBanner = ({ item }) => {
           item.release_date
         )}) | ${item.vote_average}`}
       </p>
-      <p>{`${threeYearsAgo} (${formatTimeDiff(threeYearsAgo)})`}</p>
-      <p>{`${twoYearsAgo} (${formatTimeDiff(twoYearsAgo)})`}</p>
-      <p>{`${oneYearAndMonths} (${formatTimeDiff(oneYearAndMonths)})`}</p>
-      <p>{`${oneYearAndMonth} (${formatTimeDiff(oneYearAndMonth)})`}</p>
-      <p>{`${oneYear} (${formatTimeDiff(oneYear)})`}</p>
-      <p>{`${months} (${formatTimeDiff(months)})`}</p>
-      <p>{`${monthAndDays} (${formatTimeDiff(monthAndDays)})`}</p>
-      <p>{`${month} (${formatTimeDiff(month)})`}</p>
-      <p>{`${weeks} (${formatTimeDiff(weeks)})`}</p>
-      <p>{`${weekAndDays} (${formatTimeDiff(weekAndDays)})`}</p>
-      <p>{`${days} (${formatTimeDiff(days)})`}</p>
+      <p>{`${threeYearsAgo} (${formatTimeDiff(threeYearsAgo, now)})`}</p>
+      <p>{`${twoYearsAgo} (${formatTimeDiff(twoYearsAgo, now)})`}</p>
+      <p>{`${oneYearAndMonths} (${formatTimeDiff(oneYearAndMonths, now)})`}</p>
+      <p>{`${oneYearAndMonth} (${formatTimeDiff(oneYearAndMonth, now)})`}</p>
+      <p>{`${oneYear} (${formatTimeDiff(oneYear, now)})`}</p>
+      <p>{`${months} (${formatTimeDiff(months, now)})`}</p>
+      <p>{`${monthAndDays} (${formatTimeDiff(monthAndDays, now)})`}</p>
+      <p>{`${month} (${formatTimeDiff(month, now)})`}</p>
+      <p>{`${weeks} (${formatTimeDiff(weeks, now)})`}</p>
+      <p>{`${weekAndDays} (${formatTimeDiff(weekAndDays, now)})`}</p>
+      <p>{`${days} (${formatTimeDiff(days, now)})`}</p>
+      <p>{`${zero} (${formatTimeDiff(zero, now)})`}</p>
       <p>{`${dayAndHours} (${formatTimeDiff(dayAndHours, now)})`}</p>
       <p>{`${hours} (${formatTimeDiff(hours, now)})`}</p>
       <p>{`${hourAndMinutes} (${formatTimeDiff(hourAndMinutes, now)})`}</p>
