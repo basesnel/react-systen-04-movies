@@ -141,10 +141,10 @@ const formatTimeDiff = (dateString, now = new Date()) => {
       : `in a year and ${months} months`;
   }
 
-  if (secondsDiff >= secondsInTwoYears) {
-    const years = Math.floor(secondsDiff / secondsInYear);
+  if (fullSeconds >= secondsInTwoYears) {
+    const years = Math.floor(fullSeconds / secondsInYear);
 
-    return years > 0 ? `${years} years ago` : `in ${years} years`;
+    return secondsDiff > 0 ? `${years} years ago` : `in ${years} years`;
   }
 };
 
