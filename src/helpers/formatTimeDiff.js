@@ -15,7 +15,7 @@ const formatTimeDiff = (dateString, now = new Date()) => {
   const secondsInTwoWeeks = secondsInWeek * 2;
   const secondsInMonth = Math.round(secondsInDay * 30.437);
   const secondsInTwoMonths = secondsInMonth * 2;
-  const secondsInYear = Math.round(secondsInDay * 365.25);
+  const secondsInYear = Math.round(secondsInDay * 365.242);
   const secondsInTwoYears = secondsInYear * 2;
 
   if (fullSeconds < secondsInMinute) {
@@ -107,7 +107,6 @@ const formatTimeDiff = (dateString, now = new Date()) => {
   }
 
   if (fullSeconds < secondsInTwoMonths) {
-    // const month = Math.floor(secondsDiff / secondsInMonth);
     const days = Math.floor((fullSeconds % secondsInMonth) / secondsInDay);
 
     if (!days) return secondsDiff > 0 ? "a month ago" : "in a month";
@@ -120,12 +119,10 @@ const formatTimeDiff = (dateString, now = new Date()) => {
       : `in a month and ${days} days`;
   }
 
-  if (Math.abs(secondsDiff) < secondsInYear) {
-    const months = Math.floor(secondsDiff / secondsInMonth);
+  if (fullSeconds < secondsInYear) {
+    const months = Math.floor(fullSeconds / secondsInMonth);
 
-    return months > 0
-      ? `${months} months ago`
-      : `in ${Math.abs(months)} months`;
+    return secondsDiff > 0 ? `${months} months ago` : `in ${months} months`;
   }
 
   if (Math.abs(secondsDiff) < secondsInTwoYears) {
