@@ -125,18 +125,20 @@ const formatTimeDiff = (dateString, now = new Date()) => {
     return secondsDiff > 0 ? `${months} months ago` : `in ${months} months`;
   }
 
-  if (Math.abs(secondsDiff) < secondsInTwoYears) {
-    const year = Math.floor(secondsDiff / secondsInYear);
-    const months = Math.floor((secondsDiff % secondsInYear) / secondsInMonth);
+  if (fullSeconds < secondsInTwoYears) {
+    // const year = Math.floor(secondsDiff / secondsInYear);
+    const months = Math.floor((fullSeconds % secondsInYear) / secondsInMonth);
 
-    if (!months) return year > 0 ? "a year ago" : "in a year";
+    if (!months) return secondsDiff > 0 ? "a year ago" : "in a year";
 
-    if (Math.abs(months) === 1)
-      return year > 0 ? "a year and a month ago" : "in a year and a month";
+    if (months === 1)
+      return secondsDiff > 0
+        ? "a year and a month ago"
+        : "in a year and a month";
 
-    return year > 0
+    return secondsDiff > 0
       ? `a year and ${months} months ago`
-      : `in a year and ${Math.abs(months)} months`;
+      : `in a year and ${months} months`;
   }
 
   if (secondsDiff >= secondsInTwoYears) {
