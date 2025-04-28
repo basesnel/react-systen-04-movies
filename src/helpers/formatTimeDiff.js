@@ -159,6 +159,11 @@ const formatTimeDiff = (dateString, now = new Date()) => {
         ? `almost ${years} years and a half ago`
         : `in almost ${years} years and a half`;
 
+    if (remainder > secondsInYear / 4)
+      return secondsDiff > 0
+        ? `almost ${years} years and a qwarter ago`
+        : `in almost ${years} years and a qwarter`;
+
     return secondsDiff > 0 ? `${years} years ago` : `in ${years} years`;
   }
 };
