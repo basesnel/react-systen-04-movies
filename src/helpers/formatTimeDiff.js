@@ -18,6 +18,10 @@ const formatTimeDiff = (dateString, now = new Date()) => {
   const secondsInYear = Math.round(secondsInDay * 365.242);
   const secondsInTwoYears = secondsInYear * 2;
 
+  if (fullSeconds === 0 || fullSeconds === 1) {
+    return "now";
+  }
+
   if (fullSeconds < secondsInMinute) {
     const seconds = fullSeconds;
 
