@@ -142,13 +142,22 @@ const formatTimeDiff = (dateString, now = new Date()) => {
 
   if (fullSeconds >= secondsInTwoYears) {
     const years = Math.floor(fullSeconds / secondsInYear);
-    const months = Math.floor((fullSeconds % secondsInYear) / secondsInMonth);
-    console.log(months);
+    const remainder = Math.floor(fullSeconds % secondsInYear);
 
-    if (months === 11)
+    if (remainder > (secondsInYear * 9) / 10)
       return secondsDiff > 0
         ? `almost ${years + 1} years ago`
         : `in almost ${years + 1} years`;
+
+    if (remainder > (secondsInYear * 3) / 4)
+      return secondsDiff > 0
+        ? `almost ${years} years and three-qwarters ago`
+        : `in almost ${years} years and three-qwarters`;
+
+    if (remainder > secondsInYear / 2)
+      return secondsDiff > 0
+        ? `almost ${years} years and a half ago`
+        : `in almost ${years} years and a half`;
 
     return secondsDiff > 0 ? `${years} years ago` : `in ${years} years`;
   }
