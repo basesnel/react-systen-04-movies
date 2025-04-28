@@ -126,7 +126,6 @@ const formatTimeDiff = (dateString, now = new Date()) => {
   }
 
   if (fullSeconds < secondsInTwoYears) {
-    // const year = Math.floor(secondsDiff / secondsInYear);
     const months = Math.floor((fullSeconds % secondsInYear) / secondsInMonth);
 
     if (!months) return secondsDiff > 0 ? "a year ago" : "in a year";
@@ -143,6 +142,13 @@ const formatTimeDiff = (dateString, now = new Date()) => {
 
   if (fullSeconds >= secondsInTwoYears) {
     const years = Math.floor(fullSeconds / secondsInYear);
+    const months = Math.floor((fullSeconds % secondsInYear) / secondsInMonth);
+    console.log(months);
+
+    if (months === 11)
+      return secondsDiff > 0
+        ? `almost ${years + 1} years ago`
+        : `in almost ${years + 1} years`;
 
     return secondsDiff > 0 ? `${years} years ago` : `in ${years} years`;
   }

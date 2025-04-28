@@ -8,7 +8,7 @@ const MoviesBanner = ({ item }) => {
     "Fri Apr 25 2025 00:00:00 GMT+0300 (Eastern European Summer Time)";
   const now = new Date(nowTime);
 
-  const threeYearsAgo = "2010-04-25";
+  const threeYearsAgo = "2010-04-24";
   const twoYearsAgo = "2023-04-25";
   const oneYearAndMonths = "2023-07-27";
   const oneYearAndMonth = "2026-05-27";
