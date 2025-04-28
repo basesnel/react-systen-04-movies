@@ -121,6 +121,27 @@ const formatTimeDiff = (dateString, now = new Date()) => {
 
   if (fullSeconds < secondsInYear) {
     const months = Math.floor(fullSeconds / secondsInMonth);
+    const remainder = Math.floor(fullSeconds % secondsInMonth);
+
+    if (remainder > (secondsInMonth * 9) / 10)
+      return secondsDiff > 0
+        ? `almost ${months + 1} months ago`
+        : `in almost ${months + 1} months`;
+
+    if (remainder > (secondsInMonth * 3) / 4)
+      return secondsDiff > 0
+        ? `almost ${months} months and three-qwarters ago`
+        : `in almost ${months} months and three-qwarters`;
+
+    if (remainder > secondsInMonth / 2)
+      return secondsDiff > 0
+        ? `almost ${months} months and a half ago`
+        : `in almost ${months} months and a half`;
+
+    if (remainder > secondsInMonth / 4)
+      return secondsDiff > 0
+        ? `almost ${months} months and a qwarter ago`
+        : `in almost ${months} months and a qwarter`;
 
     return secondsDiff > 0 ? `${months} months ago` : `in ${months} months`;
   }
