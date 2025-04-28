@@ -15,7 +15,7 @@ const MoviesBanner = ({ item }) => {
   const oneYear = "2024-04-24";
   const months = "2024-09-14";
   const monthAndDays = "2025-02-23 12:00:00";
-  const month = "2025-03-26";
+  const month = "2025-02-14";
   const weeks = "2025-05-09";
   const weekAndDays = "2025-05-09";
   const days = "2025-05-03";

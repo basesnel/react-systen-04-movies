@@ -130,18 +130,18 @@ const formatTimeDiff = (dateString, now = new Date()) => {
 
     if (remainder > (secondsInMonth * 3) / 4)
       return secondsDiff > 0
-        ? `almost ${months} months and three-qwarters ago`
-        : `in almost ${months} months and three-qwarters`;
+        ? `${months} months and three-qwarters ago`
+        : `in ${months} months and three-qwarters`;
 
     if (remainder > secondsInMonth / 2)
       return secondsDiff > 0
-        ? `almost ${months} months and a half ago`
-        : `in almost ${months} months and a half`;
+        ? `${months} months and a half ago`
+        : `in ${months} months and a half`;
 
     if (remainder > secondsInMonth / 4)
       return secondsDiff > 0
-        ? `almost ${months} months and a qwarter ago`
-        : `in almost ${months} months and a qwarter`;
+        ? `${months} months and a qwarter ago`
+        : `in ${months} months and a qwarter`;
 
     return secondsDiff > 0 ? `${months} months ago` : `in ${months} months`;
   }
@@ -172,18 +172,18 @@ const formatTimeDiff = (dateString, now = new Date()) => {
 
     if (remainder > (secondsInYear * 3) / 4)
       return secondsDiff > 0
-        ? `almost ${years} years and three-qwarters ago`
-        : `in almost ${years} years and three-qwarters`;
+        ? `${years} years and three-qwarters ago`
+        : `in ${years} years and three-qwarters`;
 
     if (remainder > secondsInYear / 2)
       return secondsDiff > 0
-        ? `almost ${years} years and a half ago`
-        : `in almost ${years} years and a half`;
+        ? `${years} years and a half ago`
+        : `in ${years} years and a half`;
 
     if (remainder > secondsInYear / 4)
       return secondsDiff > 0
-        ? `almost ${years} years and a qwarter ago`
-        : `in almost ${years} years and a qwarter`;
+        ? `${years} years and a qwarter ago`
+        : `in ${years} years and a qwarter`;
 
     return secondsDiff > 0 ? `${years} years ago` : `in ${years} years`;
   }
