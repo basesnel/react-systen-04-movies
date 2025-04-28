@@ -43,6 +43,27 @@ const formatTimeDiff = (dateString, now = new Date()) => {
 
   if (fullSeconds < secondsInHour) {
     const minutes = Math.floor(fullSeconds / secondsInMinute);
+    const remainder = Math.floor(fullSeconds % secondsInMinute);
+
+    if (remainder > (secondsInMinute * 9) / 10)
+      return secondsDiff > 0
+        ? `almost ${minutes + 1} minutes ago`
+        : `in almost ${minutes + 1} minutes`;
+
+    if (remainder > (secondsInMinute * 3) / 4)
+      return secondsDiff > 0
+        ? `${minutes} minutes and three-qwarters ago`
+        : `in ${minutes} minutes and three-qwarters`;
+
+    if (remainder > secondsInMinute / 2)
+      return secondsDiff > 0
+        ? `${minutes} minutes and a half ago`
+        : `in ${minutes} minutes and a half`;
+
+    if (remainder > secondsInMinute / 4)
+      return secondsDiff > 0
+        ? `${minutes} minutes and a qwarter ago`
+        : `in ${minutes} minutes and a qwarter`;
 
     return secondsDiff > 0 ? `${minutes} minutes ago` : `in ${minutes} minutes`;
   }
