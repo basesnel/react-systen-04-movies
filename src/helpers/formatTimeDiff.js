@@ -102,6 +102,27 @@ const formatTimeDiff = (dateString, now = new Date()) => {
 
   if (fullSeconds < secondsInMonth) {
     const weeks = Math.floor(fullSeconds / secondsInWeek);
+    const remainder = Math.floor(fullSeconds % secondsInWeek);
+
+    if (remainder > (secondsInWeek * 9) / 10)
+      return secondsDiff > 0
+        ? `almost ${weeks + 1} weeks ago`
+        : `in almost ${weeks + 1} weeks`;
+
+    if (remainder > (secondsInWeek * 3) / 4)
+      return secondsDiff > 0
+        ? `${weeks} weeks and three-qwarters ago`
+        : `in ${weeks} weeks and three-qwarters`;
+
+    if (remainder > secondsInWeek / 2)
+      return secondsDiff > 0
+        ? `${weeks} weeks and a half ago`
+        : `in ${weeks} weeks and a half`;
+
+    if (remainder > secondsInWeek / 4)
+      return secondsDiff > 0
+        ? `${weeks} weeks and a qwarter ago`
+        : `in ${weeks} weeks and a qwarter`;
 
     return secondsDiff > 0 ? `${weeks} weeks ago` : `in ${weeks} weeks`;
   }
