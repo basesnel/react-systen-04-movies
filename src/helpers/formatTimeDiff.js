@@ -147,18 +147,8 @@ const formatTimeDiff = (dateString, now = new Date()) => {
 
   if (fullSeconds < secondsInMonth) return firstSubcount(secondsInWeek, "week");
 
-  if (fullSeconds < secondsInTwoMonths) {
-    const days = Math.floor((fullSeconds % secondsInMonth) / secondsInDay);
-
-    if (!days) return secondsDiff > 0 ? "a month ago" : "in a month";
-
-    if (days === 1)
-      return secondsDiff > 0 ? "a month and a day ago" : "in a month and a day";
-
-    return secondsDiff > 0
-      ? `a month and ${days} days ago`
-      : `in a month and ${days} days`;
-  }
+  if (fullSeconds < secondsInTwoMonths)
+    return secondSubcount(secondsInMonth, secondsInDay, "month", "day");
 
   if (fullSeconds < secondsInYear)
     return firstSubcount(secondsInMonth, "month");
