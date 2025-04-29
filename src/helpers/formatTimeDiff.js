@@ -116,32 +116,7 @@ const formatTimeDiff = (dateString, now = new Date()) => {
       : `in a hour and ${minutes} minutes`;
   }
 
-  if (fullSeconds < secondsInDay) {
-    const hours = Math.floor(fullSeconds / secondsInHour);
-    const remainder = Math.floor(fullSeconds % secondsInHour);
-
-    if (remainder > (secondsInHour * 9) / 10)
-      return secondsDiff > 0
-        ? `almost ${hours + 1} hours ago`
-        : `in almost ${hours + 1} hours`;
-
-    if (remainder > (secondsInHour * 3) / 4)
-      return secondsDiff > 0
-        ? `${hours} hours and three-qwarters ago`
-        : `in ${hours} hours and three-qwarters`;
-
-    if (remainder > secondsInHour / 2)
-      return secondsDiff > 0
-        ? `${hours} hours and a half ago`
-        : `in ${hours} hours and a half`;
-
-    if (remainder > secondsInHour / 4)
-      return secondsDiff > 0
-        ? `${hours} hours and a qwarter ago`
-        : `in ${hours} hours and a qwarter`;
-
-    return secondsDiff > 0 ? `${hours} hours ago` : `in ${hours} hours`;
-  }
+  if (fullSeconds < secondsInDay) return firstSubcount(secondsInHour, "hour");
 
   if (fullSeconds < secondsInTwoDays) {
     const hours = Math.floor((fullSeconds % secondsInDay) / secondsInHour);
@@ -157,32 +132,6 @@ const formatTimeDiff = (dateString, now = new Date()) => {
   }
 
   if (fullSeconds < secondsInWeek) return firstSubcount(secondsInDay, "day");
-  // {
-  //   const days = Math.floor(fullSeconds / secondsInDay);
-  //   const remainder = Math.floor(fullSeconds % secondsInDay);
-
-  //   if (remainder > (secondsInDay * 9) / 10)
-  //     return secondsDiff > 0
-  //       ? `almost ${days + 1} days ago`
-  //       : `in almost ${days + 1} days`;
-
-  //   if (remainder > (secondsInDay * 3) / 4)
-  //     return secondsDiff > 0
-  //       ? `${days} days and three-qwarters ago`
-  //       : `in ${days} days and three-qwarters`;
-
-  //   if (remainder > secondsInDay / 2)
-  //     return secondsDiff > 0
-  //       ? `${days} days and a half ago`
-  //       : `in ${days} days and a half`;
-
-  //   if (remainder > secondsInDay / 4)
-  //     return secondsDiff > 0
-  //       ? `${days} days and a qwarter ago`
-  //       : `in ${days} days and a qwarter`;
-
-  //   return secondsDiff > 0 ? `${days} days ago` : `in ${Math.abs(days)} days`;
-  // }
 
   if (fullSeconds < secondsInTwoWeeks) {
     const days = Math.floor((fullSeconds % secondsInWeek) / secondsInDay);
