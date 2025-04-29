@@ -10,7 +10,7 @@ const MoviesBanner = ({ item }) => {
 
   const threeYearsAgo = "2011-04-28";
   const twoYearsAgo = "2023-04-25";
-  const oneYearAndMonths = "2023-07-27";
+  const oneYearAndMonths = "2027-03-30";
   const oneYearAndMonth = "2026-05-27";
   const oneYear = "2024-04-24";
   const months = "2025-09-26";

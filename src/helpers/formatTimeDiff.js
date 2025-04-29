@@ -47,6 +47,29 @@ const formatTimeDiff = (dateString, now = new Date()) => {
       : `in ${amount} ${timeUnit}s`;
   };
 
+  const secondSubcount = (
+    secondsInAmount,
+    secondsInPart,
+    timeUnit,
+    timePart
+  ) => {
+    const partTimes = Math.floor(
+      (fullSeconds % secondsInAmount) / secondsInPart
+    );
+
+    if (!partTimes)
+      return secondsDiff > 0 ? `a ${timeUnit} ago` : `in a ${timeUnit}`;
+
+    if (partTimes === 1)
+      return secondsDiff > 0
+        ? `a ${timeUnit} and a ${timePart} ago`
+        : `in a ${timeUnit} and a ${timePart}`;
+
+    return secondsDiff > 0
+      ? `a ${timeUnit} and ${partTimes} ${timePart}s ago`
+      : `in a ${timeUnit} and ${partTimes} ${timePart}s`;
+  };
+
   if (fullSeconds === 0 || fullSeconds === 1) {
     return "now";
   }
@@ -76,32 +99,6 @@ const formatTimeDiff = (dateString, now = new Date()) => {
 
   if (fullSeconds < secondsInHour)
     return firstSubcount(secondsInMinute, "minute");
-  // {
-  //   const minutes = Math.floor(fullSeconds / secondsInMinute);
-  //   const remainder = Math.floor(fullSeconds % secondsInMinute);
-
-  //   if (remainder > (secondsInMinute * 9) / 10)
-  //     return secondsDiff > 0
-  //       ? `almost ${minutes + 1} minutes ago`
-  //       : `in almost ${minutes + 1} minutes`;
-
-  //   if (remainder > (secondsInMinute * 3) / 4)
-  //     return secondsDiff > 0
-  //       ? `${minutes} minutes and three-qwarters ago`
-  //       : `in ${minutes} minutes and three-qwarters`;
-
-  //   if (remainder > secondsInMinute / 2)
-  //     return secondsDiff > 0
-  //       ? `${minutes} minutes and a half ago`
-  //       : `in ${minutes} minutes and a half`;
-
-  //   if (remainder > secondsInMinute / 4)
-  //     return secondsDiff > 0
-  //       ? `${minutes} minutes and a qwarter ago`
-  //       : `in ${minutes} minutes and a qwarter`;
-
-  //   return secondsDiff > 0 ? `${minutes} minutes ago` : `in ${minutes} minutes`;
-  // }
 
   if (fullSeconds < secondsInTwoHours) {
     const minutes = Math.floor((fullSeconds % secondsInHour) / secondsInMinute);
@@ -166,20 +163,8 @@ const formatTimeDiff = (dateString, now = new Date()) => {
   if (fullSeconds < secondsInYear)
     return firstSubcount(secondsInMonth, "month");
 
-  if (fullSeconds < secondsInTwoYears) {
-    const months = Math.floor((fullSeconds % secondsInYear) / secondsInMonth);
-
-    if (!months) return secondsDiff > 0 ? "a year ago" : "in a year";
-
-    if (months === 1)
-      return secondsDiff > 0
-        ? "a year and a month ago"
-        : "in a year and a month";
-
-    return secondsDiff > 0
-      ? `a year and ${months} months ago`
-      : `in a year and ${months} months`;
-  }
+  if (fullSeconds < secondsInTwoYears)
+    return secondSubcount(secondsInYear, secondsInMonth, "year", "month");
 
   if (fullSeconds >= secondsInTwoYears)
     return firstSubcount(secondsInYear, "year");
