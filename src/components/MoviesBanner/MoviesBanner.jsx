@@ -18,8 +18,8 @@ const MoviesBanner = ({ item }) => {
   const month = "2025-02-14";
   const weeks = "2025-04-10";
   const weekAndDays = "2025-05-09";
-  const days = "2025-05-03";
-  const zero = "2025-04-25 05:00:00";
+  const days = "2025-04-20";
+  const zero = "2025-04-25 00:00:00";
   const dayAndHours = "2025-04-26 06:00:00";
   const hours = "2025-04-28 10:31:00";
   const hourAndMinutes = "2025-04-25 06:02:10";
