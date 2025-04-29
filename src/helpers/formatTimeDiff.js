@@ -196,32 +196,33 @@ const formatTimeDiff = (dateString, now = new Date()) => {
       : `in a week and ${days} days`;
   }
 
-  if (fullSeconds < secondsInMonth) {
-    const weeks = Math.floor(fullSeconds / secondsInWeek);
-    const remainder = Math.floor(fullSeconds % secondsInWeek);
+  if (fullSeconds < secondsInMonth) return firstSubcount(secondsInWeek, "week");
+  // {
+  //   const weeks = Math.floor(fullSeconds / secondsInWeek);
+  //   const remainder = Math.floor(fullSeconds % secondsInWeek);
 
-    if (remainder > (secondsInWeek * 9) / 10)
-      return secondsDiff > 0
-        ? `almost ${weeks + 1} weeks ago`
-        : `in almost ${weeks + 1} weeks`;
+  //   if (remainder > (secondsInWeek * 9) / 10)
+  //     return secondsDiff > 0
+  //       ? `almost ${weeks + 1} weeks ago`
+  //       : `in almost ${weeks + 1} weeks`;
 
-    if (remainder > (secondsInWeek * 3) / 4)
-      return secondsDiff > 0
-        ? `${weeks} weeks and three-qwarters ago`
-        : `in ${weeks} weeks and three-qwarters`;
+  //   if (remainder > (secondsInWeek * 3) / 4)
+  //     return secondsDiff > 0
+  //       ? `${weeks} weeks and three-qwarters ago`
+  //       : `in ${weeks} weeks and three-qwarters`;
 
-    if (remainder > secondsInWeek / 2)
-      return secondsDiff > 0
-        ? `${weeks} weeks and a half ago`
-        : `in ${weeks} weeks and a half`;
+  //   if (remainder > secondsInWeek / 2)
+  //     return secondsDiff > 0
+  //       ? `${weeks} weeks and a half ago`
+  //       : `in ${weeks} weeks and a half`;
 
-    if (remainder > secondsInWeek / 4)
-      return secondsDiff > 0
-        ? `${weeks} weeks and a qwarter ago`
-        : `in ${weeks} weeks and a qwarter`;
+  //   if (remainder > secondsInWeek / 4)
+  //     return secondsDiff > 0
+  //       ? `${weeks} weeks and a qwarter ago`
+  //       : `in ${weeks} weeks and a qwarter`;
 
-    return secondsDiff > 0 ? `${weeks} weeks ago` : `in ${weeks} weeks`;
-  }
+  //   return secondsDiff > 0 ? `${weeks} weeks ago` : `in ${weeks} weeks`;
+  // }
 
   if (fullSeconds < secondsInTwoMonths) {
     const days = Math.floor((fullSeconds % secondsInMonth) / secondsInDay);
@@ -238,32 +239,6 @@ const formatTimeDiff = (dateString, now = new Date()) => {
 
   if (fullSeconds < secondsInYear)
     return firstSubcount(secondsInMonth, "month");
-  // {
-  //   const months = Math.floor(fullSeconds / secondsInMonth);
-  //   const remainder = Math.floor(fullSeconds % secondsInMonth);
-
-  //   if (remainder > (secondsInMonth * 9) / 10)
-  //     return secondsDiff > 0
-  //       ? `almost ${months + 1} months ago`
-  //       : `in almost ${months + 1} months`;
-
-  //   if (remainder > (secondsInMonth * 3) / 4)
-  //     return secondsDiff > 0
-  //       ? `${months} months and three-qwarters ago`
-  //       : `in ${months} months and three-qwarters`;
-
-  //   if (remainder > secondsInMonth / 2)
-  //     return secondsDiff > 0
-  //       ? `${months} months and a half ago`
-  //       : `in ${months} months and a half`;
-
-  //   if (remainder > secondsInMonth / 4)
-  //     return secondsDiff > 0
-  //       ? `${months} months and a qwarter ago`
-  //       : `in ${months} months and a qwarter`;
-
-  //   return secondsDiff > 0 ? `${months} months ago` : `in ${months} months`;
-  // }
 
   if (fullSeconds < secondsInTwoYears) {
     const months = Math.floor((fullSeconds % secondsInYear) / secondsInMonth);
