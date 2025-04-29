@@ -24,27 +24,27 @@ const formatTimeDiff = (dateString, now = new Date()) => {
 
     if (remainder > (secondsInAmount * 9) / 10)
       return secondsDiff > 0
-        ? `almost ${amount + 1} ${timeUnit} ago`
-        : `in almost ${amount + 1} ${timeUnit}`;
+        ? `almost ${amount + 1} ${timeUnit}s ago`
+        : `in almost ${amount + 1} ${timeUnit}s`;
 
     if (remainder > (secondsInAmount * 3) / 4)
       return secondsDiff > 0
-        ? `${amount} ${timeUnit} and three-qwarters ago`
-        : `in ${amount} ${timeUnit} and three-qwarters`;
+        ? `${amount} ${timeUnit}s and three-qwarters ago`
+        : `in ${amount} ${timeUnit}s and three-qwarters`;
 
     if (remainder > secondsInAmount / 2)
       return secondsDiff > 0
-        ? `${amount} ${timeUnit} and a half ago`
-        : `in ${amount} ${timeUnit} and a half`;
+        ? `${amount} ${timeUnit}s and a half ago`
+        : `in ${amount} ${timeUnit}s and a half`;
 
     if (remainder > secondsInAmount / 4)
       return secondsDiff > 0
-        ? `${amount} ${timeUnit} and a qwarter ago`
-        : `in ${amount} ${timeUnit} and a qwarter`;
+        ? `${amount} ${timeUnit}s and a qwarter ago`
+        : `in ${amount} ${timeUnit}s and a qwarter`;
 
     return secondsDiff > 0
-      ? `${amount} ${timeUnit} ago`
-      : `in ${amount} ${timeUnit}`;
+      ? `${amount} ${timeUnit}s ago`
+      : `in ${amount} ${timeUnit}s`;
   };
 
   if (fullSeconds === 0 || fullSeconds === 1) {
@@ -197,32 +197,6 @@ const formatTimeDiff = (dateString, now = new Date()) => {
   }
 
   if (fullSeconds < secondsInMonth) return firstSubcount(secondsInWeek, "week");
-  // {
-  //   const weeks = Math.floor(fullSeconds / secondsInWeek);
-  //   const remainder = Math.floor(fullSeconds % secondsInWeek);
-
-  //   if (remainder > (secondsInWeek * 9) / 10)
-  //     return secondsDiff > 0
-  //       ? `almost ${weeks + 1} weeks ago`
-  //       : `in almost ${weeks + 1} weeks`;
-
-  //   if (remainder > (secondsInWeek * 3) / 4)
-  //     return secondsDiff > 0
-  //       ? `${weeks} weeks and three-qwarters ago`
-  //       : `in ${weeks} weeks and three-qwarters`;
-
-  //   if (remainder > secondsInWeek / 2)
-  //     return secondsDiff > 0
-  //       ? `${weeks} weeks and a half ago`
-  //       : `in ${weeks} weeks and a half`;
-
-  //   if (remainder > secondsInWeek / 4)
-  //     return secondsDiff > 0
-  //       ? `${weeks} weeks and a qwarter ago`
-  //       : `in ${weeks} weeks and a qwarter`;
-
-  //   return secondsDiff > 0 ? `${weeks} weeks ago` : `in ${weeks} weeks`;
-  // }
 
   if (fullSeconds < secondsInTwoMonths) {
     const days = Math.floor((fullSeconds % secondsInMonth) / secondsInDay);
