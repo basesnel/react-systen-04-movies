@@ -50,22 +50,22 @@ const formatTimeDiff = (dateString, now = new Date()) => {
     const amount = Math.floor(fullSeconds / secondsInAmount);
     const remainder = Math.floor(fullSeconds % secondsInAmount);
 
-    if (remainder > (secondsInAmount * 9) / 10)
+    if (remainder >= (secondsInAmount * 9) / 10)
       return secondsDiff > 0
         ? `almost ${amount + 1} ${timeUnit}s ago`
         : `in almost ${amount + 1} ${timeUnit}s`;
 
-    if (remainder > (secondsInAmount * 3) / 4)
+    if (remainder >= (secondsInAmount * 3) / 4)
       return secondsDiff > 0
         ? `${amount} ${timeUnit}s and three-qwarters ago`
         : `in ${amount} ${timeUnit}s and three-qwarters`;
 
-    if (remainder > secondsInAmount / 2)
+    if (remainder >= secondsInAmount / 2)
       return secondsDiff > 0
         ? `${amount} ${timeUnit}s and a half ago`
         : `in ${amount} ${timeUnit}s and a half`;
 
-    if (remainder > secondsInAmount / 4)
+    if (remainder >= secondsInAmount / 4)
       return secondsDiff > 0
         ? `${amount} ${timeUnit}s and a qwarter ago`
         : `in ${amount} ${timeUnit}s and a qwarter`;
