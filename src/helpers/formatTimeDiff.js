@@ -100,20 +100,22 @@ const formatTimeDiff = (dateString, now = new Date()) => {
   if (fullSeconds < secondsInHour)
     return firstSubcount(secondsInMinute, "minute");
 
-  if (fullSeconds < secondsInTwoHours) {
-    const minutes = Math.floor((fullSeconds % secondsInHour) / secondsInMinute);
+  if (fullSeconds < secondsInTwoHours)
+    return secondSubcount(secondsInHour, secondsInMinute, "hour", "minute");
+  // {
+  //   const minutes = Math.floor((fullSeconds % secondsInHour) / secondsInMinute);
 
-    if (!minutes) return secondsDiff > 0 ? "a hour ago" : "in a hour";
+  //   if (!minutes) return secondsDiff > 0 ? "a hour ago" : "in a hour";
 
-    if (minutes === 1)
-      return secondsDiff > 0
-        ? "a hour and a minute ago"
-        : "in a hour and a minute";
+  //   if (minutes === 1)
+  //     return secondsDiff > 0
+  //       ? "a hour and a minute ago"
+  //       : "in a hour and a minute";
 
-    return secondsDiff > 0
-      ? `a hour and ${minutes} minutes ago`
-      : `in a hour and ${minutes} minutes`;
-  }
+  //   return secondsDiff > 0
+  //     ? `a hour and ${minutes} minutes ago`
+  //     : `in a hour and ${minutes} minutes`;
+  // }
 
   if (fullSeconds < secondsInDay) return firstSubcount(secondsInHour, "hour");
 
