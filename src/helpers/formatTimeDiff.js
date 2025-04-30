@@ -18,7 +18,35 @@ const formatTimeDiff = (dateString, now = new Date()) => {
   const secondsInYear = Math.round(secondsInDay * 365.242);
   const secondsInTwoYears = secondsInYear * 2;
 
-  const firstSubcount = (secondsInAmount, timeUnit) => {
+  const countUpToMinute = () =>
+    secondsDiff > 0
+      ? `${fullSeconds} seconds ago`
+      : `in ${fullSeconds} seconds`;
+
+  const countUpToTwoUnits = (
+    secondsInAmount,
+    secondsInPart,
+    timeUnit,
+    timePart
+  ) => {
+    const partTimes = Math.floor(
+      (fullSeconds % secondsInAmount) / secondsInPart
+    );
+
+    if (!partTimes)
+      return secondsDiff > 0 ? `a ${timeUnit} ago` : `in a ${timeUnit}`;
+
+    if (partTimes === 1)
+      return secondsDiff > 0
+        ? `a ${timeUnit} and a ${timePart} ago`
+        : `in a ${timeUnit} and a ${timePart}`;
+
+    return secondsDiff > 0
+      ? `a ${timeUnit} and ${partTimes} ${timePart}s ago`
+      : `in a ${timeUnit} and ${partTimes} ${timePart}s`;
+  };
+
+  const countAfterTwoUnits = (secondsInAmount, timeUnit) => {
     const amount = Math.floor(fullSeconds / secondsInAmount);
     const remainder = Math.floor(fullSeconds % secondsInAmount);
 
@@ -47,70 +75,45 @@ const formatTimeDiff = (dateString, now = new Date()) => {
       : `in ${amount} ${timeUnit}s`;
   };
 
-  const secondSubcount = (
-    secondsInAmount,
-    secondsInPart,
-    timeUnit,
-    timePart
-  ) => {
-    const partTimes = Math.floor(
-      (fullSeconds % secondsInAmount) / secondsInPart
-    );
-
-    if (!partTimes)
-      return secondsDiff > 0 ? `a ${timeUnit} ago` : `in a ${timeUnit}`;
-
-    if (partTimes === 1)
-      return secondsDiff > 0
-        ? `a ${timeUnit} and a ${timePart} ago`
-        : `in a ${timeUnit} and a ${timePart}`;
-
-    return secondsDiff > 0
-      ? `a ${timeUnit} and ${partTimes} ${timePart}s ago`
-      : `in a ${timeUnit} and ${partTimes} ${timePart}s`;
-  };
-
-  const countUpToMinute = () =>
-    secondsDiff > 0
-      ? `${fullSeconds} seconds ago`
-      : `in ${fullSeconds} seconds`;
-
   if (fullSeconds <= 1) return "now";
 
   if (fullSeconds < secondsInMinute) return countUpToMinute();
 
   if (fullSeconds < secondsInTwoMinutes)
-    return secondSubcount(secondsInMinute, oneSecond, "minute", "second");
+    return countUpToTwoUnits(secondsInMinute, oneSecond, "minute", "second");
 
   if (fullSeconds < secondsInHour)
-    return firstSubcount(secondsInMinute, "minute");
+    return countAfterTwoUnits(secondsInMinute, "minute");
 
   if (fullSeconds < secondsInTwoHours)
-    return secondSubcount(secondsInHour, secondsInMinute, "hour", "minute");
+    return countUpToTwoUnits(secondsInHour, secondsInMinute, "hour", "minute");
 
-  if (fullSeconds < secondsInDay) return firstSubcount(secondsInHour, "hour");
+  if (fullSeconds < secondsInDay)
+    return countAfterTwoUnits(secondsInHour, "hour");
 
   if (fullSeconds < secondsInTwoDays)
-    return secondSubcount(secondsInDay, secondsInHour, "day", "hour");
+    return countUpToTwoUnits(secondsInDay, secondsInHour, "day", "hour");
 
-  if (fullSeconds < secondsInWeek) return firstSubcount(secondsInDay, "day");
+  if (fullSeconds < secondsInWeek)
+    return countAfterTwoUnits(secondsInDay, "day");
 
   if (fullSeconds < secondsInTwoWeeks)
-    return secondSubcount(secondsInWeek, secondsInDay, "week", "day");
+    return countUpToTwoUnits(secondsInWeek, secondsInDay, "week", "day");
 
-  if (fullSeconds < secondsInMonth) return firstSubcount(secondsInWeek, "week");
+  if (fullSeconds < secondsInMonth)
+    return countAfterTwoUnits(secondsInWeek, "week");
 
   if (fullSeconds < secondsInTwoMonths)
-    return secondSubcount(secondsInMonth, secondsInDay, "month", "day");
+    return countUpToTwoUnits(secondsInMonth, secondsInDay, "month", "day");
 
   if (fullSeconds < secondsInYear)
-    return firstSubcount(secondsInMonth, "month");
+    return countAfterTwoUnits(secondsInMonth, "month");
 
   if (fullSeconds < secondsInTwoYears)
-    return secondSubcount(secondsInYear, secondsInMonth, "year", "month");
+    return countUpToTwoUnits(secondsInYear, secondsInMonth, "year", "month");
 
   if (fullSeconds >= secondsInTwoYears)
-    return firstSubcount(secondsInYear, "year");
+    return countAfterTwoUnits(secondsInYear, "year");
 };
 
 export default formatTimeDiff;
