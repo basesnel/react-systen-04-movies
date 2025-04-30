@@ -70,19 +70,14 @@ const formatTimeDiff = (dateString, now = new Date()) => {
       : `in a ${timeUnit} and ${partTimes} ${timePart}s`;
   };
 
-  const thirdSubcount = () => {
-    const seconds = fullSeconds;
+  const countUpToMinute = () =>
+    secondsDiff > 0
+      ? `${fullSeconds} seconds ago`
+      : `in ${fullSeconds} seconds`;
 
-    if (seconds === 1) return secondsDiff > 0 ? "a second ago" : "in a second";
+  if (fullSeconds <= 1) return "now";
 
-    return secondsDiff > 0 ? `${seconds} seconds ago` : `in ${seconds} seconds`;
-  };
-
-  if (fullSeconds === 0 || fullSeconds === 1) {
-    return "now";
-  }
-
-  if (fullSeconds < secondsInMinute) return thirdSubcount();
+  if (fullSeconds < secondsInMinute) return countUpToMinute();
 
   if (fullSeconds < secondsInTwoMinutes)
     return secondSubcount(secondsInMinute, oneSecond, "minute", "second");
