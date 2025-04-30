@@ -17,6 +17,16 @@ const formatTimeDiff = (dateString, now = new Date()) => {
   const secondsInYear = Math.round(secondsInDay * 365.242);
   const secondsInTwoYears = secondsInYear * 2;
 
+  const timeUnits = {
+    second: "second",
+    minute: "minute",
+    hour: "hour",
+    day: "day",
+    week: "week",
+    month: "month",
+    year: "year",
+  };
+
   const countUpToMinute = () =>
     secondsDiff > 0
       ? `${fullSeconds} seconds ago`
@@ -25,8 +35,8 @@ const formatTimeDiff = (dateString, now = new Date()) => {
   const countUpToTwoUnits = (
     secondsInAmount = secondsInMinute,
     secondsInPart = oneSecond,
-    timeUnit = "minute",
-    timePart = "second"
+    timeUnit = timeUnits.minute,
+    timePart = timeUnits.second
   ) => {
     const partTimes = Math.floor(
       (fullSeconds % secondsInAmount) / secondsInPart
@@ -47,7 +57,7 @@ const formatTimeDiff = (dateString, now = new Date()) => {
 
   const countAfterTwoUnits = (
     secondsInAmount = secondsInMinute,
-    timeUnit = "minute"
+    timeUnit = timeUnits.minute
   ) => {
     const amount = Math.floor(fullSeconds / secondsInAmount);
     const remainder = Math.floor(fullSeconds % secondsInAmount);
@@ -86,34 +96,59 @@ const formatTimeDiff = (dateString, now = new Date()) => {
   if (fullSeconds < secondsInHour) return countAfterTwoUnits();
 
   if (fullSeconds < secondsInTwoHours)
-    return countUpToTwoUnits(secondsInHour, secondsInMinute, "hour", "minute");
+    return countUpToTwoUnits(
+      secondsInHour,
+      secondsInMinute,
+      timeUnits.hour,
+      timeUnits.minute
+    );
 
   if (fullSeconds < secondsInDay)
-    return countAfterTwoUnits(secondsInHour, "hour");
+    return countAfterTwoUnits(secondsInHour, timeUnits.hour);
 
   if (fullSeconds < secondsInTwoDays)
-    return countUpToTwoUnits(secondsInDay, secondsInHour, "day", "hour");
+    return countUpToTwoUnits(
+      secondsInDay,
+      secondsInHour,
+      timeUnits.day,
+      timeUnits.hour
+    );
 
   if (fullSeconds < secondsInWeek)
-    return countAfterTwoUnits(secondsInDay, "day");
+    return countAfterTwoUnits(secondsInDay, timeUnits.day);
 
   if (fullSeconds < secondsInTwoWeeks)
-    return countUpToTwoUnits(secondsInWeek, secondsInDay, "week", "day");
+    return countUpToTwoUnits(
+      secondsInWeek,
+      secondsInDay,
+      timeUnits.week,
+      timeUnits.day
+    );
 
   if (fullSeconds < secondsInMonth)
-    return countAfterTwoUnits(secondsInWeek, "week");
+    return countAfterTwoUnits(secondsInWeek, timeUnits.week);
 
   if (fullSeconds < secondsInTwoMonths)
-    return countUpToTwoUnits(secondsInMonth, secondsInDay, "month", "day");
+    return countUpToTwoUnits(
+      secondsInMonth,
+      secondsInDay,
+      timeUnits.month,
+      timeUnits.day
+    );
 
   if (fullSeconds < secondsInYear)
-    return countAfterTwoUnits(secondsInMonth, "month");
+    return countAfterTwoUnits(secondsInMonth, timeUnits.month);
 
   if (fullSeconds < secondsInTwoYears)
-    return countUpToTwoUnits(secondsInYear, secondsInMonth, "year", "month");
+    return countUpToTwoUnits(
+      secondsInYear,
+      secondsInMonth,
+      timeUnits.year,
+      timeUnits.month
+    );
 
   if (fullSeconds >= secondsInTwoYears)
-    return countAfterTwoUnits(secondsInYear, "year");
+    return countAfterTwoUnits(secondsInYear, timeUnits.year);
 };
 
 export default formatTimeDiff;
