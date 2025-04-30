@@ -1,5 +1,4 @@
 const formatTimeDiff = (dateString, now = new Date()) => {
-  // const now = new Date();
   const date = new Date(dateString);
   const secondsDiff = (now.getTime() - date.getTime()) / 1000;
   const fullSeconds = Math.floor(Math.abs(secondsDiff));
@@ -24,10 +23,10 @@ const formatTimeDiff = (dateString, now = new Date()) => {
       : `in ${fullSeconds} seconds`;
 
   const countUpToTwoUnits = (
-    secondsInAmount,
-    secondsInPart,
-    timeUnit,
-    timePart
+    secondsInAmount = secondsInMinute,
+    secondsInPart = oneSecond,
+    timeUnit = "minute",
+    timePart = "second"
   ) => {
     const partTimes = Math.floor(
       (fullSeconds % secondsInAmount) / secondsInPart
@@ -46,7 +45,10 @@ const formatTimeDiff = (dateString, now = new Date()) => {
       : `in a ${timeUnit} and ${partTimes} ${timePart}s`;
   };
 
-  const countAfterTwoUnits = (secondsInAmount, timeUnit) => {
+  const countAfterTwoUnits = (
+    secondsInAmount = secondsInMinute,
+    timeUnit = "minute"
+  ) => {
     const amount = Math.floor(fullSeconds / secondsInAmount);
     const remainder = Math.floor(fullSeconds % secondsInAmount);
 
@@ -79,11 +81,9 @@ const formatTimeDiff = (dateString, now = new Date()) => {
 
   if (fullSeconds < secondsInMinute) return countUpToMinute();
 
-  if (fullSeconds < secondsInTwoMinutes)
-    return countUpToTwoUnits(secondsInMinute, oneSecond, "minute", "second");
+  if (fullSeconds < secondsInTwoMinutes) return countUpToTwoUnits();
 
-  if (fullSeconds < secondsInHour)
-    return countAfterTwoUnits(secondsInMinute, "minute");
+  if (fullSeconds < secondsInHour) return countAfterTwoUnits();
 
   if (fullSeconds < secondsInTwoHours)
     return countUpToTwoUnits(secondsInHour, secondsInMinute, "hour", "minute");
