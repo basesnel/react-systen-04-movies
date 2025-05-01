@@ -74,7 +74,7 @@ const getMovieGenres = async () => {
     .catch(handleError);
 };
 
-const getDiscoveryMovies = async (with_genres) => {
+const getDiscoveryMovies = async ({ page = 1, with_genres }) => {
   const options = {
     url: `${API_BASE_URL}discover/movie`,
     method: "GET",
@@ -82,7 +82,7 @@ const getDiscoveryMovies = async (with_genres) => {
       include_adult: false,
       include_video: false,
       language: "en-US",
-      page: 1,
+      page,
       sort_by: "popularity.desc",
       with_genres,
     },

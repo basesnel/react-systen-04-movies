@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { getMovies, getMovieGenres } from "../../api/apiMovies";
+import {
+  getMovies,
+  getMovieGenres,
+  getDiscoveryMovies,
+} from "../../api/apiMovies";
 import MoviesBanner from "../../components/MoviesBanner/MoviesBanner";
 import MoviesList from "../../components/MoviesList/MoviesList";
 import Pagination from "../../components/Pagination/Pagination";
@@ -10,16 +14,19 @@ import styles from "./styles.module.css";
 
 const Main = () => {
   const [movies, setMovies] = useState([]);
+  // const [discoveryMovies, setDiscoveryMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [movieGenres, setMovieGenres] = useState([]);
-  const [selectedMovieGenres, setSelectedMovieGenres] = useState("All");
+  const [selectedMovieGenres, setSelectedMovieGenres] = useState(null);
   const totalPages = 10;
 
   const fetchMovies = async (currentPage) => {
     try {
       setIsLoading(true);
-      const response = await getMovies(currentPage);
+      const response = !selectedMovieGenres
+        ? await getMovies(currentPage)
+        : await getDiscoveryMovies(currentPage);
       console.log(response);
       setIsLoading(false);
       setMovies(response.results);
@@ -39,13 +46,29 @@ const Main = () => {
 
   console.log(movieGenres);
 
+  const fetchDiscoveryMovies = async (currentPage) => {
+    try {
+      setIsLoading(true);
+      const response = await getDiscoveryMovies({
+        page: currentPage,
+        with_genres:
+          selectedMovieGenres === "Popular" ? null : selectedMovieGenres,
+      });
+      console.log(response);
+      setIsLoading(false);
+      setMovies(response.results);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     fetchMovieGenres();
   }, []);
 
   useEffect(() => {
     fetchMovies(currentPage);
-  }, [currentPage]);
+  }, [currentPage, selectedMovieGenres]);
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
