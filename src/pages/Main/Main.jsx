@@ -43,11 +43,11 @@ const Main = () => {
       console.log(response);
 
       // temporary get discovery movie (start):
-      console.log("discovery movies:");
-      await getDiscoveryMovies({
-        page: currentPage,
-        with_genres: condition ? null : selectedMovieGenres,
-      });
+      // console.log("discovery movies:");
+      // await getDiscoveryMovies({
+      //   page: currentPage,
+      //   with_genres: condition ? null : selectedMovieGenres,
+      // });
       // temporary get discovery movie (end):
 
       setIsLoading(false);

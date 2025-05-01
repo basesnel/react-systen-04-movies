@@ -7,7 +7,9 @@ const Genres = ({ genres, setSelectedGenre, selectedGenre }) => {
         return (
           <button
             onClick={() => setSelectedGenre(name)}
-            className={selectedGenre === name ? styles.active : styles.item}
+            className={
+              selectedGenre.name === name ? styles.active : styles.item
+            }
             key={id}
           >
             {name}
