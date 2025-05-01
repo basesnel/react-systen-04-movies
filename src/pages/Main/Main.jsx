@@ -44,7 +44,10 @@ const Main = () => {
 
       // temporary get discovery movie (start):
       console.log("discovery movies:");
-      await getDiscoveryMovies(currentPage);
+      await getDiscoveryMovies({
+        page: currentPage,
+        with_genres: condition ? null : selectedMovieGenres,
+      });
       // temporary get discovery movie (end):
 
       setIsLoading(false);
