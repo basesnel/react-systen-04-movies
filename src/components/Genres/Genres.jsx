@@ -6,7 +6,7 @@ const Genres = ({ genres, setSelectedGenre, selectedGenre }) => {
       {genres.map(({ id, name }) => {
         return (
           <button
-            onClick={() => setSelectedGenre(name)}
+            onClick={() => setSelectedGenre({ id: id, name: name })}
             className={
               selectedGenre.name === name ? styles.active : styles.item
             }

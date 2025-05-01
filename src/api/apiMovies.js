@@ -94,7 +94,7 @@ const getDiscoveryMovies = async ({ page = 1, with_genres }) => {
 
   axios
     .request(options)
-    .then((res) => console.log(res.data))
+    .then((res) => res.data)
     .catch(handleError);
 };
 

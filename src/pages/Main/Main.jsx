@@ -25,20 +25,19 @@ const Main = () => {
   });
   const totalPages = 10;
 
+  console.log(selectedMovieGenres);
+
   const fetchMovies = async (currentPage) => {
     try {
       setIsLoading(true);
 
-      const condition =
-        selectedMovieGenres.len === 1 &&
-        selectedMovieGenres[0].name === "Popular";
+      const condition = selectedMovieGenres.name === "Popular";
 
-      const response = !condition
+      const response = condition
         ? await getMovies(currentPage)
         : await getDiscoveryMovies({
             page: currentPage,
-            with_genres:
-              selectedMovieGenres === "Popular" ? null : selectedMovieGenres,
+            with_genres: selectedMovieGenres.id,
           });
       console.log(response);
 
