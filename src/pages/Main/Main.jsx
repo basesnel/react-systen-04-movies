@@ -5,6 +5,7 @@ import {
   getMovieGenres,
   getDiscoveryMovies,
 } from "../../api/apiMovies";
+import Genres from "../../components/Genres/Genres";
 import MoviesBanner from "../../components/MoviesBanner/MoviesBanner";
 import MoviesList from "../../components/MoviesList/MoviesList";
 import Pagination from "../../components/Pagination/Pagination";
@@ -46,21 +47,21 @@ const Main = () => {
 
   console.log(movieGenres);
 
-  const fetchDiscoveryMovies = async (currentPage) => {
-    try {
-      setIsLoading(true);
-      const response = await getDiscoveryMovies({
-        page: currentPage,
-        with_genres:
-          selectedMovieGenres === "Popular" ? null : selectedMovieGenres,
-      });
-      console.log(response);
-      setIsLoading(false);
-      setMovies(response.results);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const fetchDiscoveryMovies = async (currentPage) => {
+  //   try {
+  //     setIsLoading(true);
+  //     const response = await getDiscoveryMovies({
+  //       page: currentPage,
+  //       with_genres:
+  //         selectedMovieGenres === "Popular" ? null : selectedMovieGenres,
+  //     });
+  //     console.log(response);
+  //     setIsLoading(false);
+  //     setMovies(response.results);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   useEffect(() => {
     fetchMovieGenres();
@@ -88,6 +89,12 @@ const Main = () => {
 
   return (
     <main className={styles.main}>
+      <Genres
+        genres={movieGenres}
+        setSelectedGenre={setSelectedMovieGenres}
+        selectedGenre={selectedMovieGenres}
+      />
+
       {movies.length > 0 && !isLoading ? (
         <MoviesBanner item={movies[0]} />
       ) : (
