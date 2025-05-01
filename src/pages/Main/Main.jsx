@@ -19,15 +19,27 @@ const Main = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [movieGenres, setMovieGenres] = useState([]);
-  const [selectedMovieGenres, setSelectedMovieGenres] = useState(null);
+  const [selectedMovieGenres, setSelectedMovieGenres] = useState({
+    id: 1,
+    name: "Popular",
+  });
   const totalPages = 10;
 
   const fetchMovies = async (currentPage) => {
     try {
       setIsLoading(true);
-      const response = !selectedMovieGenres
+
+      const condition =
+        selectedMovieGenres.len === 1 &&
+        selectedMovieGenres[0].name === "Popular";
+
+      const response = !condition
         ? await getMovies(currentPage)
-        : await getDiscoveryMovies(currentPage);
+        : await getDiscoveryMovies({
+            page: currentPage,
+            with_genres:
+              selectedMovieGenres === "Popular" ? null : selectedMovieGenres,
+          });
       console.log(response);
 
       // temporary get discovery movie (start):
