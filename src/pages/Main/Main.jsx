@@ -29,6 +29,12 @@ const Main = () => {
         ? await getMovies(currentPage)
         : await getDiscoveryMovies(currentPage);
       console.log(response);
+
+      // temporary get discovery movie (start):
+      console.log("discovery movies:");
+      await getDiscoveryMovies(currentPage);
+      // temporary get discovery movie (end):
+
       setIsLoading(false);
       setMovies(response.results);
     } catch (error) {
@@ -45,7 +51,7 @@ const Main = () => {
     }
   };
 
-  console.log(movieGenres);
+  // console.log(movieGenres);
 
   // const fetchDiscoveryMovies = async (currentPage) => {
   //   try {
