@@ -79,7 +79,7 @@ const getDiscoveryMovies = async ({ page = 1, with_genres }) => {
     url: `${API_BASE_URL}discover/movie`,
     method: "GET",
     params: {
-      include_adult: false,
+      include_adult: true,
       include_video: false,
       language: "en-US",
       page,
@@ -94,7 +94,7 @@ const getDiscoveryMovies = async ({ page = 1, with_genres }) => {
 
   axios
     .request(options)
-    .then((res) => res.data)
+    .then((res) => console.log(res.data))
     .catch(handleError);
 };
 
