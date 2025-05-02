@@ -13,11 +13,11 @@ const MoviesItem = ({ item }) => {
       ></div>
       <div className={styles.info}>
         <h3 className={styles.title}>{item.title}</h3>
-        <p className={styles.extra}>
-          {`Release: ${item.release_date} (${formatTimeDiff(
-            item.release_date
-          )}) | ${item.vote_average}`}
-        </p>
+        <p className={styles.extra}>{`Release: ${item.release_date}`}</p>
+        <p className={styles.extra}>{`(${formatTimeDiff(
+          item.release_date
+        )})`}</p>
+        <p className={styles.extra}>{`score: ${item.vote_average}`}</p>
       </div>
     </li>
   );

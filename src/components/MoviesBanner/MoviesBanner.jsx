@@ -9,9 +9,9 @@ const MoviesBanner = ({ item }) => {
       <Image image={`https://image.tmdb.org/t/p/w300${item?.poster_path}`} />
       <h3 className={styles.title}>{item.title}</h3>
       <p className={styles.extra}>
-        {`Release: ${item.release_date} (${formatTimeDiff(
+        {`Release: ${item.release_date} | (${formatTimeDiff(
           item.release_date
-        )}) | ${item.vote_average}`}
+        )}) | score: ${item.vote_average}`}
       </p>
     </div>
   );

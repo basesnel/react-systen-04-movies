@@ -15,7 +15,6 @@ import styles from "./styles.module.css";
 
 const Main = () => {
   const [movies, setMovies] = useState([]);
-  // const [discoveryMovies, setDiscoveryMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [movieGenres, setMovieGenres] = useState([]);
@@ -37,15 +36,8 @@ const Main = () => {
             page: currentPage,
             with_genres: selectedMovieGenres.id,
           });
-      console.log(response);
 
-      // temporary get discovery movie (start):
-      // console.log("discovery movies:");
-      // await getDiscoveryMovies({
-      //   page: currentPage,
-      //   with_genres: condition ? null : selectedMovieGenres,
-      // });
-      // temporary get discovery movie (end):
+      console.log(response);
 
       setIsLoading(false);
       setMovies(response.results);
@@ -62,24 +54,6 @@ const Main = () => {
       console.error(error);
     }
   };
-
-  // console.log(movieGenres);
-
-  // const fetchDiscoveryMovies = async (currentPage) => {
-  //   try {
-  //     setIsLoading(true);
-  //     const response = await getDiscoveryMovies({
-  //       page: currentPage,
-  //       with_genres:
-  //         selectedMovieGenres === "Popular" ? null : selectedMovieGenres,
-  //     });
-  //     console.log(response);
-  //     setIsLoading(false);
-  //     setMovies(response.results);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
 
   useEffect(() => {
     fetchMovieGenres();
