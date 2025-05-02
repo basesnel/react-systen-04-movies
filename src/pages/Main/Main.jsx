@@ -28,16 +28,13 @@ const Main = () => {
     try {
       setIsLoading(true);
 
-      const condition = selectedMovieGenres.name === "Popular";
-
-      const response = condition
-        ? await getMovies(currentPage)
-        : await getDiscoveryMovies({
-            page: currentPage,
-            with_genres: selectedMovieGenres.id,
-          });
-
-      console.log(response);
+      const response =
+        selectedMovieGenres.name === "Popular"
+          ? await getMovies(currentPage)
+          : await getDiscoveryMovies({
+              page: currentPage,
+              with_genres: selectedMovieGenres.id,
+            });
 
       setIsLoading(false);
       setMovies(response.results);

@@ -11,7 +11,6 @@ function App() {
     const fetchConfiguration = async () => {
       try {
         const response = await getConfiguration();
-        console.log(response);
         setConfiguration(response);
       } catch (error) {
         console.error(error);
