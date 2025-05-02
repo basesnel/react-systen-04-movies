@@ -1,5 +1,5 @@
-import roundToTwo from "../../helpers/formatRoundToTwo";
 import formatTimeDiff from "../../helpers/formatTimeDiff";
+import formatRoundToTwo from "../../helpers/formatRoundToTwo";
 import Image from "../Image/Image";
 
 import styles from "./styles.module.css";
@@ -12,7 +12,7 @@ const MoviesBanner = ({ item }) => {
       <p className={styles.extra}>
         {`Release: ${item.release_date} | (${formatTimeDiff(
           item.release_date
-        )}) | score: ${roundToTwo(item.vote_average)} (votes: ${
+        )}) | score: ${formatRoundToTwo(item.vote_average)} (votes: ${
           item.vote_count
         })`}
       </p>
