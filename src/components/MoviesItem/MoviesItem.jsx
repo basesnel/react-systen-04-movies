@@ -17,7 +17,9 @@ const MoviesItem = ({ item }) => {
         <p className={styles.extra}>{`(${formatTimeDiff(
           item.release_date
         )})`}</p>
-        <p className={styles.extra}>{`score: ${item.vote_average}`}</p>
+        <p
+          className={styles.extra}
+        >{`score: ${item.vote_average} (votes: ${item.vote_count})`}</p>
       </div>
     </li>
   );

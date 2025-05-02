@@ -11,7 +11,7 @@ const MoviesBanner = ({ item }) => {
       <p className={styles.extra}>
         {`Release: ${item.release_date} | (${formatTimeDiff(
           item.release_date
-        )}) | score: ${item.vote_average}`}
+        )}) | score: ${item.vote_average} (votes: ${item.vote_count})`}
       </p>
     </div>
   );
