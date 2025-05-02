@@ -21,6 +21,9 @@ const MoviesItem = ({ item }) => {
         <p className={styles.extra}>{`score: ${formatRoundToTwo(
           item.vote_average
         )} (votes: ${item.vote_count})`}</p>
+        <p className={styles.extra}>{`popularity: ${formatRoundToTwo(
+          item.popularity
+        )}`}</p>
       </div>
     </li>
   );

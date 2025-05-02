@@ -14,7 +14,7 @@ const MoviesBanner = ({ item }) => {
           item.release_date
         )}) | score: ${formatRoundToTwo(item.vote_average)} (votes: ${
           item.vote_count
-        })`}
+        }) | popularity: ${formatRoundToTwo(item.popularity)}`}
       </p>
     </div>
   );
