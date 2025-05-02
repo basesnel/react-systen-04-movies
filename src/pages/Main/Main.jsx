@@ -25,8 +25,6 @@ const Main = () => {
   });
   const totalPages = 10;
 
-  console.log(selectedMovieGenres);
-
   const fetchMovies = async (currentPage) => {
     try {
       setIsLoading(true);
