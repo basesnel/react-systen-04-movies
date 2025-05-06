@@ -14,16 +14,32 @@ const MoviesItem = ({ item }) => {
       ></div>
       <div className={styles.info}>
         <h3 className={styles.title}>{item.title}</h3>
-        <p className={styles.extra}>{`Release: ${item.release_date}`}</p>
-        <p className={styles.extra}>{`(${formatTimeDiff(
-          item.release_date
-        )})`}</p>
-        <p className={styles.extra}>{`score: ${formatRoundToTwo(
-          item.vote_average
-        )} (votes: ${item.vote_count})`}</p>
-        <p className={styles.extra}>{`popularity: ${formatRoundToTwo(
-          item.popularity
-        )}`}</p>
+        <p className={styles.extra}>
+          Release:{" "}
+          <span className={styles.highlighted}>{`${item.release_date}`}</span>
+        </p>
+        <p className={styles.extra}>
+          {"("}
+          <span className={styles.highlighted}>{`${formatTimeDiff(
+            item.release_date
+          )}`}</span>
+          {")"}
+        </p>
+        <p className={styles.extra}>
+          score:
+          <span className={styles.highlighted}>{`${formatRoundToTwo(
+            item.vote_average
+          )}`}</span>
+          {" (votes: "}
+          <span className={styles.highlighted}>{`${item.vote_count}`}</span>
+          {")"}
+        </p>
+        <p className={styles.extra}>
+          popularity:{" "}
+          <span className={styles.highlighted}>{`${formatRoundToTwo(
+            item.popularity
+          )}`}</span>
+        </p>
       </div>
     </li>
   );

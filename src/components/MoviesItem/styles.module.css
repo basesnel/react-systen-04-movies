@@ -28,3 +28,7 @@
   font-size: 12px;
   color: #6c7072;
 }
+
+.highlighted {
+  font-weight: 700;
+}
