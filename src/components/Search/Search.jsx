@@ -2,7 +2,7 @@ import styles from "./styles.module.css";
 
 const Search = ({ query, setQuery }) => {
   return (
-    <div>
+    <div className={styles.search}>
       <input
         type="text"
         value={query}
