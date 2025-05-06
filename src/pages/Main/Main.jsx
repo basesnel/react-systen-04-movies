@@ -58,21 +58,6 @@ const Main = () => {
     }
   };
 
-  // const fetchFoundMovies = async (currentPage, query) => {
-  //   try {
-  //     // setIsLoading(true);
-
-  //     const response = await getFoundMovies({
-  //       page: currentPage,
-  //       query,
-  //     });
-
-  //     // setMovies(response.results);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
   useEffect(() => {
     fetchMovieGenres();
   }, []);
