@@ -10,6 +10,7 @@ import Genres from "../../components/Genres/Genres";
 import MoviesBanner from "../../components/MoviesBanner/MoviesBanner";
 import MoviesList from "../../components/MoviesList/MoviesList";
 import Pagination from "../../components/Pagination/Pagination";
+import Search from "../../components/Search/Search";
 import Skeleton from "../../components/Skeleton/Skeleton";
 
 import styles from "./styles.module.css";
@@ -19,6 +20,7 @@ const Main = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [movieGenres, setMovieGenres] = useState([]);
+  const [movieQuery, setMovieQuery] = useState("");
   const [selectedMovieGenres, setSelectedMovieGenres] = useState({
     id: 1,
     name: "Popular",
@@ -93,6 +95,8 @@ const Main = () => {
     setCurrentPage(pageNumber);
   };
 
+  console.log(movieQuery);
+
   return (
     <main className={styles.main}>
       <Genres
@@ -100,6 +104,8 @@ const Main = () => {
         setSelectedGenre={setSelectedMovieGenres}
         selectedGenre={selectedMovieGenres}
       />
+
+      <Search query={movieQuery} setQuery={setMovieQuery} />
 
       {movies.length > 0 && !isLoading ? (
         <MoviesBanner item={movies[0]} />
