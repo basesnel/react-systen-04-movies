@@ -4,6 +4,7 @@ import {
   getMovies,
   getMovieGenres,
   getDiscoveryMovies,
+  getFoundMovies,
 } from "../../api/apiMovies";
 import Genres from "../../components/Genres/Genres";
 import MoviesBanner from "../../components/MoviesBanner/MoviesBanner";
@@ -52,7 +53,23 @@ const Main = () => {
     }
   };
 
+  const fetchFoundMovies = async (currentPage, query) => {
+    try {
+      // setIsLoading(true);
+
+      const response = await getFoundMovies({
+        page: currentPage,
+        query,
+      });
+
+      // setMovies(response.results);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
+    fetchFoundMovies(1, "terminal");
     fetchMovieGenres();
   }, []);
 
