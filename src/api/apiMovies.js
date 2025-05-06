@@ -98,4 +98,32 @@ const getDiscoveryMovies = async ({ page = 1, with_genres }) => {
     .catch(handleError);
 };
 
-export { getConfiguration, getMovies, getMovieGenres, getDiscoveryMovies };
+const getFoundMovies = async ({ page = 1, query }) => {
+  const options = {
+    url: `${API_BASE_URL}search/movie`,
+    method: "GET",
+    params: {
+      include_adult: true,
+      language: "en-US",
+      page,
+      query,
+    },
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${API_KEY}`,
+    },
+  };
+
+  axios
+    .request(options)
+    .then((res) => console.log(res.data))
+    .catch((err) => console.error(err));
+};
+
+export {
+  getConfiguration,
+  getMovies,
+  getMovieGenres,
+  getDiscoveryMovies,
+  getFoundMovies,
+};
