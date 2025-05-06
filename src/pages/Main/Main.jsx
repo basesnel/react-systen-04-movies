@@ -29,18 +29,21 @@ const Main = () => {
 
   const fetchMovies = async (currentPage) => {
     try {
-      setIsLoading(true);
+      if (movieQuery.length) {
+        await getFoundMovies({ currentPage, movieQuery });
+      } else {
+        setIsLoading(true);
+        const response =
+          selectedMovieGenres.name === "Popular"
+            ? await getMovies(currentPage)
+            : await getDiscoveryMovies({
+                page: currentPage,
+                with_genres: selectedMovieGenres.id,
+              });
 
-      const response =
-        selectedMovieGenres.name === "Popular"
-          ? await getMovies(currentPage)
-          : await getDiscoveryMovies({
-              page: currentPage,
-              with_genres: selectedMovieGenres.id,
-            });
-
-      setIsLoading(false);
-      setMovies(response.results);
+        setIsLoading(false);
+        setMovies(response.results);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -55,29 +58,28 @@ const Main = () => {
     }
   };
 
-  const fetchFoundMovies = async (currentPage, query) => {
-    try {
-      // setIsLoading(true);
+  // const fetchFoundMovies = async (currentPage, query) => {
+  //   try {
+  //     // setIsLoading(true);
 
-      const response = await getFoundMovies({
-        page: currentPage,
-        query,
-      });
+  //     const response = await getFoundMovies({
+  //       page: currentPage,
+  //       query,
+  //     });
 
-      // setMovies(response.results);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  //     // setMovies(response.results);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   useEffect(() => {
-    fetchFoundMovies(1, "terminal");
     fetchMovieGenres();
   }, []);
 
   useEffect(() => {
     fetchMovies(currentPage);
-  }, [currentPage, selectedMovieGenres]);
+  }, [currentPage, selectedMovieGenres, movieQuery]);
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
