@@ -13,6 +13,7 @@ import Pagination from "../../components/Pagination/Pagination";
 import Search from "../../components/Search/Search";
 import { TOTAL_PAGES } from "../../constants/constants";
 import useDebounce from "../../helpers/hooks/useDebounce";
+import useFetch from "../../helpers/hooks/useFetch";
 
 import styles from "./styles.module.css";
 
@@ -28,6 +29,8 @@ const Main = () => {
   });
 
   const debouncedMovieQwery = useDebounce(movieQuery, 1500);
+
+  // const {data, error, isLoading} = useFetch()
 
   const fetchMovies = async (currentPage) => {
     try {
