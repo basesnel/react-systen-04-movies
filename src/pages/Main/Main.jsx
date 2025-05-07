@@ -96,11 +96,16 @@ const Main = () => {
 
       <Search query={movieQuery} setQuery={setMovieQuery} />
 
-      {movies.length > 0 && !isLoading ? (
+      <MoviesBanner
+        isLoading={isLoading}
+        item={movies.length > 0 && movies[0]}
+      />
+
+      {/* {movies.length > 0 && !isLoading ? (
         <MoviesBanner item={movies[0]} />
       ) : (
         <Skeleton type="banner" count={1} />
-      )}
+      )} */}
 
       <Pagination
         handlePreviousPage={handlePreviousPage}
@@ -110,11 +115,13 @@ const Main = () => {
         currentPage={currentPage}
       />
 
-      {!isLoading ? (
+      <MoviesList isLoading={isLoading} movies={movies} />
+
+      {/* {!isLoading ? (
         <MoviesList movies={movies} />
       ) : (
         <Skeleton type="item" count={20} />
-      )}
+      )} */}
 
       <Pagination
         handlePreviousPage={handlePreviousPage}

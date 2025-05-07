@@ -1,3 +1,4 @@
+import withSkeleton from "../../helpers/hocs/withSkeleton";
 import MoviesItem from "../MoviesItem/MoviesItem";
 
 import styles from "./styles.module.css";
@@ -12,4 +13,6 @@ const MoviesList = ({ movies }) => {
   );
 };
 
-export default MoviesList;
+const MoviesListWithSkeleton = withSkeleton(MoviesList, "item", 20);
+
+export default MoviesListWithSkeleton;
