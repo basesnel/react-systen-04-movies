@@ -12,6 +12,7 @@ import MoviesList from "../../components/MoviesList/MoviesList";
 import Pagination from "../../components/Pagination/Pagination";
 import Search from "../../components/Search/Search";
 import Skeleton from "../../components/Skeleton/Skeleton";
+import { TOTAL_PAGES } from "../../constants/constants";
 import useDebounce from "../../helpers/hooks/useDebounce";
 
 import styles from "./styles.module.css";
@@ -26,7 +27,6 @@ const Main = () => {
     id: 1,
     name: "Popular",
   });
-  const totalPages = 10;
 
   const debouncedMovieQwery = useDebounce(movieQuery, 1500);
 
@@ -71,7 +71,7 @@ const Main = () => {
   }, [currentPage, selectedMovieGenres, debouncedMovieQwery]);
 
   const handleNextPage = () => {
-    if (currentPage < totalPages) {
+    if (currentPage < TOTAL_PAGES) {
       setCurrentPage(currentPage + 1);
     }
   };
@@ -106,7 +106,7 @@ const Main = () => {
         handlePreviousPage={handlePreviousPage}
         handleNextPage={handleNextPage}
         handlePageClick={handlePageClick}
-        totalPages={totalPages}
+        totalPages={TOTAL_PAGES}
         currentPage={currentPage}
       />
 
@@ -120,7 +120,7 @@ const Main = () => {
         handlePreviousPage={handlePreviousPage}
         handleNextPage={handleNextPage}
         handlePageClick={handlePageClick}
-        totalPages={totalPages}
+        totalPages={TOTAL_PAGES}
         currentPage={currentPage}
       />
     </main>
