@@ -32,22 +32,6 @@ const Main = () => {
 
   const fetchMovies = async (currentPage) => {
     try {
-      // if (movieQuery.length) {
-      //   await getFoundMovies({ page: currentPage, query: debouncedMovieQwery });
-      // } else {
-      //   setIsLoading(true);
-      //   const response =
-      //     selectedMovieGenres.name === "Popular"
-      //       ? await getMovies(currentPage)
-      //       : await getDiscoveryMovies({
-      //           page: currentPage,
-      //           with_genres: selectedMovieGenres.id,
-      //         });
-
-      //   setIsLoading(false);
-      //   setMovies(response.results);
-      // }
-
       setIsLoading(true);
 
       const response = movieQuery.length
