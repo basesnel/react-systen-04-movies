@@ -12,6 +12,7 @@ import MoviesList from "../../components/MoviesList/MoviesList";
 import Pagination from "../../components/Pagination/Pagination";
 import Search from "../../components/Search/Search";
 import Skeleton from "../../components/Skeleton/Skeleton";
+import useDebounce from "../../helpers/hooks/useDebounce";
 
 import styles from "./styles.module.css";
 
@@ -27,10 +28,12 @@ const Main = () => {
   });
   const totalPages = 10;
 
+  const debouncedMovieQwery = useDebounce(movieQuery, 1500);
+
   const fetchMovies = async (currentPage) => {
     try {
       if (movieQuery.length) {
-        await getFoundMovies({ currentPage, movieQuery });
+        await getFoundMovies({ page: currentPage, query: debouncedMovieQwery });
       } else {
         setIsLoading(true);
         const response =
@@ -64,7 +67,7 @@ const Main = () => {
 
   useEffect(() => {
     fetchMovies(currentPage);
-  }, [currentPage, selectedMovieGenres, movieQuery]);
+  }, [currentPage, selectedMovieGenres, debouncedMovieQwery]);
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
