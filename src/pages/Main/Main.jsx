@@ -32,21 +32,38 @@ const Main = () => {
 
   const fetchMovies = async (currentPage) => {
     try {
-      if (movieQuery.length) {
-        await getFoundMovies({ page: currentPage, query: debouncedMovieQwery });
-      } else {
-        setIsLoading(true);
-        const response =
-          selectedMovieGenres.name === "Popular"
-            ? await getMovies(currentPage)
-            : await getDiscoveryMovies({
-                page: currentPage,
-                with_genres: selectedMovieGenres.id,
-              });
+      // if (movieQuery.length) {
+      //   await getFoundMovies({ page: currentPage, query: debouncedMovieQwery });
+      // } else {
+      //   setIsLoading(true);
+      //   const response =
+      //     selectedMovieGenres.name === "Popular"
+      //       ? await getMovies(currentPage)
+      //       : await getDiscoveryMovies({
+      //           page: currentPage,
+      //           with_genres: selectedMovieGenres.id,
+      //         });
 
-        setIsLoading(false);
-        setMovies(response.results);
-      }
+      //   setIsLoading(false);
+      //   setMovies(response.results);
+      // }
+
+      setIsLoading(true);
+
+      const response = movieQuery.length
+        ? await getFoundMovies({
+            page: currentPage,
+            query: debouncedMovieQwery,
+          })
+        : selectedMovieGenres.name === "Popular"
+        ? await getMovies(currentPage)
+        : await getDiscoveryMovies({
+            page: currentPage,
+            with_genres: selectedMovieGenres.id,
+          });
+
+      setIsLoading(false);
+      setMovies(response.results);
     } catch (error) {
       console.error(error);
     }
@@ -84,8 +101,6 @@ const Main = () => {
   const handlePageClick = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
-  console.log(movieQuery);
 
   return (
     <main className={styles.main}>

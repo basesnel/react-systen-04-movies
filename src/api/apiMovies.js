@@ -114,9 +114,9 @@ const getFoundMovies = async ({ page = 1, query }) => {
     },
   };
 
-  axios
+  return axios
     .request(options)
-    .then((res) => console.log(res.data))
+    .then((res) => res.data)
     .catch((err) => console.error(err));
 };
 
