@@ -30,23 +30,55 @@ const Main = () => {
 
   const debouncedMovieQwery = useDebounce(movieQuery, 1500);
 
+  const switchRequestFunction = ({ queryLength, selectedGenreName }) => {
+    if (queryLength) {
+      const fun = getFoundMovies;
+      const params = { page: currentPage, query: debouncedMovieQwery };
+      return { fun, params };
+    }
+
+    if (!queryLength && selectedGenreName === "Popular") {
+      console.log({ queryLength, selectedGenreName });
+      const returnedObject = {
+        fun: getMovies,
+        params: { page: currentPage },
+      };
+      return returnedObject;
+    }
+
+    const fun = getDiscoveryMovies;
+    const params = {
+      page: currentPage,
+      with_genres: selectedMovieGenres.id,
+    };
+    return { fun: fun, params };
+  };
+
   // const {data, error, isLoading} = useFetch()
 
   const fetchMovies = async (currentPage) => {
     try {
       setIsLoading(true);
 
-      const response = movieQuery.length
-        ? await getFoundMovies({
-            page: currentPage,
-            query: debouncedMovieQwery,
-          })
-        : selectedMovieGenres.name === "Popular"
-        ? await getMovies({ page: currentPage })
-        : await getDiscoveryMovies({
-            page: currentPage,
-            with_genres: selectedMovieGenres.id,
-          });
+      const switchedRequest = switchRequestFunction({
+        queryLength: movieQuery.length,
+        selectedGenreName: selectedMovieGenres.name,
+      });
+      console.log(switchedRequest);
+
+      const response = await switchedRequest.fun(switchedRequest.params);
+
+      // const response = movieQuery.length
+      //   ? await getFoundMovies({
+      //       page: currentPage,
+      //       query: debouncedMovieQwery,
+      //     })
+      //   : selectedMovieGenres.name === "Popular"
+      //   ? await getMovies({ page: currentPage })
+      //   : await getDiscoveryMovies({
+      //       page: currentPage,
+      //       with_genres: selectedMovieGenres.id,
+      //     });
 
       setIsLoading(false);
       setMovies(response.results);
