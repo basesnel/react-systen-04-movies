@@ -20,7 +20,10 @@ const Main = () => {
   const { filters, changeFilter } = useFilters({
     page: 1,
     query: "",
-    with_genres: null,
+    with_genres: {
+      id: 1,
+      name: "Popular",
+    },
   });
 
   const debouncedMovieQwery = useDebounce(filters.query, 1500);
@@ -32,7 +35,7 @@ const Main = () => {
         params: { page: filters.page, query: debouncedMovieQwery },
       };
 
-    if (!queryLength && !selectedGenreName)
+    if (!queryLength && selectedGenreName === "Popular")
       return {
         getFunction: getMovies,
         params: { page: filters.page },
@@ -46,7 +49,7 @@ const Main = () => {
 
   const { getFunction, params } = switchGet({
     queryLength: debouncedMovieQwery.length,
-    selectedGenreName: filters?.with_genres?.name,
+    selectedGenreName: filters.with_genres.name,
   });
 
   const { data, error, isLoading } = useFetch(getFunction, params);
@@ -72,7 +75,7 @@ const Main = () => {
     <main className={styles.main}>
       {dataGenres ? (
         <Genres
-          genres={dataGenres.genres}
+          genres={[{ id: 1, name: "Popular" }, ...dataGenres.genres]}
           selectedGenre={filters.with_genres}
           setSelectedGenre={(genre) => changeFilter("with_genres", genre)}
         />
