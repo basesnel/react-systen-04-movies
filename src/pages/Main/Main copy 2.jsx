@@ -21,68 +21,65 @@ const Main = () => {
   const [filters, setFilters] = useState({
     page: 1,
     query: "",
-    with_genres: {
-      id: 1,
-      name: "Popular",
-    },
+    with_genres: null,
   });
 
-  const changeFilter = (key, value) => {
+  changeFilter = (key, value) => {
     setFilters((prev) => {
       return { ...prev, [key]: value };
     });
   };
 
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [movieQuery, setMovieQuery] = useState("");
-  // const [selectedMovieGenres, setSelectedMovieGenres] = useState({
-  //   id: 1,
-  //   name: "Popular",
-  // });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [movieQuery, setMovieQuery] = useState("");
+  const [selectedMovieGenres, setSelectedMovieGenres] = useState({
+    id: 1,
+    name: "Popular",
+  });
 
-  const debouncedMovieQwery = useDebounce(filters.query, 1500);
+  const debouncedMovieQwery = useDebounce(movieQuery, 1500);
 
   const switchGet = ({ queryLength, selectedGenreName }) => {
     if (queryLength)
       return {
         getFunction: getFoundMovies,
-        params: { page: filters.page, query: debouncedMovieQwery },
+        params: { page: currentPage, query: debouncedMovieQwery },
       };
 
     if (!queryLength && selectedGenreName === "Popular")
       return {
         getFunction: getMovies,
-        params: { page: filters.page },
+        params: { page: currentPage },
       };
 
     return {
       getFunction: getDiscoveryMovies,
-      params: { page: filters.page, with_genres: filters.with_genres.id },
+      params: { page: currentPage, with_genres: selectedMovieGenres.id },
     };
   };
 
   const { getFunction, params } = switchGet({
     queryLength: debouncedMovieQwery.length,
-    selectedGenreName: filters.with_genres.name,
+    selectedGenreName: selectedMovieGenres.name,
   });
 
   const { data, error, isLoading } = useFetch(getFunction, params);
   const { data: dataGenres } = useFetch(getMovieGenres);
 
   const handleNextPage = () => {
-    if (filters.page < TOTAL_PAGES) {
-      changeFilter("page", filters.page + 1);
+    if (currentPage < TOTAL_PAGES) {
+      setCurrentPage(currentPage + 1);
     }
   };
 
   const handlePreviousPage = () => {
-    if (filters.page > 1) {
-      changeFilter("page", filters.page - 1);
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
     }
   };
 
   const handlePageClick = (pageNumber) => {
-    changeFilter("page", pageNumber);
+    setCurrentPage(pageNumber);
   };
 
   return (
@@ -90,15 +87,12 @@ const Main = () => {
       {dataGenres ? (
         <Genres
           genres={[{ id: 1, name: "Popular" }, ...dataGenres.genres]}
-          selectedGenre={filters.with_genres}
-          setSelectedGenre={(genre) => changeFilter("with_genre", genre)}
+          setSelectedGenre={setSelectedMovieGenres}
+          selectedGenre={selectedMovieGenres}
         />
       ) : null}
 
-      <Search
-        query={filters.query}
-        setQuery={(query) => changeFilter("query", query)}
-      />
+      <Search query={movieQuery} setQuery={setMovieQuery} />
 
       <MoviesBanner
         isLoading={isLoading}
@@ -110,7 +104,7 @@ const Main = () => {
         handleNextPage={handleNextPage}
         handlePageClick={handlePageClick}
         totalPages={TOTAL_PAGES}
-        currentPage={filters.page}
+        currentPage={currentPage}
       />
 
       <MoviesList isLoading={isLoading} movies={data?.results} />
@@ -120,7 +114,7 @@ const Main = () => {
         handleNextPage={handleNextPage}
         handlePageClick={handlePageClick}
         totalPages={TOTAL_PAGES}
-        currentPage={filters.page}
+        currentPage={currentPage}
       />
     </main>
   );
