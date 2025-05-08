@@ -35,7 +35,7 @@ const getConfiguration = async () => {
     .catch((err) => console.error(err));
 };
 
-const getMovies = async (page = 1) => {
+const getMovies = async ({ page = 1 }) => {
   const options = {
     url: `${API_BASE_URL}movie/popular`,
     method: "GET",

@@ -42,7 +42,7 @@ const Main = () => {
             query: debouncedMovieQwery,
           })
         : selectedMovieGenres.name === "Popular"
-        ? await getMovies(currentPage)
+        ? await getMovies({ page: currentPage })
         : await getDiscoveryMovies({
             page: currentPage,
             with_genres: selectedMovieGenres.id,
