@@ -18,8 +18,8 @@ import useFetch from "../../helpers/hooks/useFetch";
 import styles from "./styles.module.css";
 
 const Main = () => {
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [movies, setMovies] = useState([]);
+  // const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [movieGenres, setMovieGenres] = useState([]);
   const [movieQuery, setMovieQuery] = useState("");
@@ -54,20 +54,20 @@ const Main = () => {
     selectedGenreName: selectedMovieGenres.name,
   });
 
-  // const {data, error, isLoading} = useFetch()
+  const { data, error, isLoading } = useFetch(getFunction, params);
 
-  const fetchMovies = async (currentPage) => {
-    try {
-      setIsLoading(true);
+  // const fetchMovies = async (currentPage) => {
+  //   try {
+  //     setIsLoading(true);
 
-      const response = await getFunction(params);
+  //     const response = await getFunction(params);
 
-      setIsLoading(false);
-      setMovies(response.results);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  //     setIsLoading(false);
+  //     setMovies(response.results);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   const fetchMovieGenres = async () => {
     try {
@@ -82,9 +82,9 @@ const Main = () => {
     fetchMovieGenres();
   }, []);
 
-  useEffect(() => {
-    fetchMovies(currentPage);
-  }, [currentPage, selectedMovieGenres, debouncedMovieQwery]);
+  // useEffect(() => {
+  //   fetchMovies(currentPage);
+  // }, [currentPage, selectedMovieGenres, debouncedMovieQwery]);
 
   const handleNextPage = () => {
     if (currentPage < TOTAL_PAGES) {
@@ -114,7 +114,7 @@ const Main = () => {
 
       <MoviesBanner
         isLoading={isLoading}
-        item={movies.length > 0 && movies[0]}
+        item={data && data.results && data.results[0]}
       />
 
       <Pagination
@@ -125,7 +125,7 @@ const Main = () => {
         currentPage={currentPage}
       />
 
-      <MoviesList isLoading={isLoading} movies={movies} />
+      <MoviesList isLoading={isLoading} movies={data?.results} />
 
       <Pagination
         handlePreviousPage={handlePreviousPage}
