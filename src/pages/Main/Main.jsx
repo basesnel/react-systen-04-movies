@@ -18,10 +18,8 @@ import useFetch from "../../helpers/hooks/useFetch";
 import styles from "./styles.module.css";
 
 const Main = () => {
-  // const [movies, setMovies] = useState([]);
-  // const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [movieGenres, setMovieGenres] = useState([]);
+  // const [movieGenres, setMovieGenres] = useState([]);
   const [movieQuery, setMovieQuery] = useState("");
   const [selectedMovieGenres, setSelectedMovieGenres] = useState({
     id: 1,
@@ -55,36 +53,20 @@ const Main = () => {
   });
 
   const { data, error, isLoading } = useFetch(getFunction, params);
+  const { data: dataGenres } = useFetch(getMovieGenres);
 
-  // const fetchMovies = async (currentPage) => {
+  // const fetchMovieGenres = async () => {
   //   try {
-  //     setIsLoading(true);
-
-  //     const response = await getFunction(params);
-
-  //     setIsLoading(false);
-  //     setMovies(response.results);
+  //     const response = await getMovieGenres();
+  //     setMovieGenres([{ id: 1, name: "Popular" }, ...response.genres]);
   //   } catch (error) {
   //     console.error(error);
   //   }
   // };
 
-  const fetchMovieGenres = async () => {
-    try {
-      const response = await getMovieGenres();
-      setMovieGenres([{ id: 1, name: "Popular" }, ...response.genres]);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchMovieGenres();
-  }, []);
-
   // useEffect(() => {
-  //   fetchMovies(currentPage);
-  // }, [currentPage, selectedMovieGenres, debouncedMovieQwery]);
+  //   fetchMovieGenres();
+  // }, []);
 
   const handleNextPage = () => {
     if (currentPage < TOTAL_PAGES) {
@@ -104,11 +86,13 @@ const Main = () => {
 
   return (
     <main className={styles.main}>
-      <Genres
-        genres={movieGenres}
-        setSelectedGenre={setSelectedMovieGenres}
-        selectedGenre={selectedMovieGenres}
-      />
+      {dataGenres ? (
+        <Genres
+          genres={[{ id: 1, name: "Popular" }, ...dataGenres.genres]}
+          setSelectedGenre={setSelectedMovieGenres}
+          selectedGenre={selectedMovieGenres}
+        />
+      ) : null}
 
       <Search query={movieQuery} setQuery={setMovieQuery} />
 
