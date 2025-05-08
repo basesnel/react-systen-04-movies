@@ -1,5 +1,3 @@
-import { useState } from "react";
-// import { useEffect } from "react";
 import {
   getMovies,
   getMovieGenres,
@@ -14,11 +12,12 @@ import Search from "../../components/Search/Search";
 import { TOTAL_PAGES } from "../../constants/constants";
 import useDebounce from "../../helpers/hooks/useDebounce";
 import useFetch from "../../helpers/hooks/useFetch";
+import useFilters from "../../helpers/hooks/useFilters";
 
 import styles from "./styles.module.css";
 
 const Main = () => {
-  const [filters, setFilters] = useState({
+  const { filters, changeFilter } = useFilters({
     page: 1,
     query: "",
     with_genres: {
@@ -26,12 +25,6 @@ const Main = () => {
       name: "Popular",
     },
   });
-
-  const changeFilter = (key, value) => {
-    setFilters((prev) => {
-      return { ...prev, [key]: value };
-    });
-  };
 
   const debouncedMovieQwery = useDebounce(filters.query, 1500);
 
