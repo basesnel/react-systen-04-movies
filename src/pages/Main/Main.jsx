@@ -49,30 +49,18 @@ const Main = () => {
     };
   };
 
+  const { getFunction, params } = switchGet({
+    queryLength: debouncedMovieQwery.length,
+    selectedGenreName: selectedMovieGenres.name,
+  });
+
   // const {data, error, isLoading} = useFetch()
 
   const fetchMovies = async (currentPage) => {
     try {
       setIsLoading(true);
 
-      const { getFunction, params } = switchGet({
-        queryLength: movieQuery.length,
-        selectedGenreName: selectedMovieGenres.name,
-      });
-
       const response = await getFunction(params);
-
-      // const response = movieQuery.length
-      //   ? await getFoundMovies({
-      //       page: currentPage,
-      //       query: debouncedMovieQwery,
-      //     })
-      //   : selectedMovieGenres.name === "Popular"
-      //   ? await getMovies({ page: currentPage })
-      //   : await getDiscoveryMovies({
-      //       page: currentPage,
-      //       with_genres: selectedMovieGenres.id,
-      //     });
 
       setIsLoading(false);
       setMovies(response.results);
