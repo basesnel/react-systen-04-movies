@@ -30,28 +30,23 @@ const Main = () => {
 
   const debouncedMovieQwery = useDebounce(movieQuery, 1500);
 
-  const switchRequestFunction = ({ queryLength, selectedGenreName }) => {
-    if (queryLength) {
-      const fun = getFoundMovies;
-      const params = { page: currentPage, query: debouncedMovieQwery };
-      return { fun, params };
-    }
+  const switchGet = ({ queryLength, selectedGenreName }) => {
+    if (queryLength)
+      return {
+        getFunction: getFoundMovies,
+        params: { page: currentPage, query: debouncedMovieQwery },
+      };
 
-    if (!queryLength && selectedGenreName === "Popular") {
-      console.log({ queryLength, selectedGenreName });
-      const returnedObject = {
-        fun: getMovies,
+    if (!queryLength && selectedGenreName === "Popular")
+      return {
+        getFunction: getMovies,
         params: { page: currentPage },
       };
-      return returnedObject;
-    }
 
-    const fun = getDiscoveryMovies;
-    const params = {
-      page: currentPage,
-      with_genres: selectedMovieGenres.id,
+    return {
+      getFunction: getDiscoveryMovies,
+      params: { page: currentPage, with_genres: selectedMovieGenres.id },
     };
-    return { fun: fun, params };
   };
 
   // const {data, error, isLoading} = useFetch()
@@ -60,13 +55,12 @@ const Main = () => {
     try {
       setIsLoading(true);
 
-      const switchedRequest = switchRequestFunction({
+      const { getFunction, params } = switchGet({
         queryLength: movieQuery.length,
         selectedGenreName: selectedMovieGenres.name,
       });
-      console.log(switchedRequest);
 
-      const response = await switchedRequest.fun(switchedRequest.params);
+      const response = await getFunction(params);
 
       // const response = movieQuery.length
       //   ? await getFoundMovies({
