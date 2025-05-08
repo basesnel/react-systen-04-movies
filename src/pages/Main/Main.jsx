@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import {
   getMovies,
   getMovieGenres,
@@ -32,13 +32,6 @@ const Main = () => {
       return { ...prev, [key]: value };
     });
   };
-
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [movieQuery, setMovieQuery] = useState("");
-  // const [selectedMovieGenres, setSelectedMovieGenres] = useState({
-  //   id: 1,
-  //   name: "Popular",
-  // });
 
   const debouncedMovieQwery = useDebounce(filters.query, 1500);
 
@@ -91,7 +84,7 @@ const Main = () => {
         <Genres
           genres={[{ id: 1, name: "Popular" }, ...dataGenres.genres]}
           selectedGenre={filters.with_genres}
-          setSelectedGenre={(genre) => changeFilter("with_genre", genre)}
+          setSelectedGenre={(genre) => changeFilter("with_genres", genre)}
         />
       ) : null}
 
