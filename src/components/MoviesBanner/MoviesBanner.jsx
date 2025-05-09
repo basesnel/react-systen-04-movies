@@ -1,6 +1,5 @@
 import formatTimeDiff from "../../helpers/formatTimeDiff";
 import formatRoundToTwo from "../../helpers/formatRoundToTwo";
-import withSkeleton from "../../helpers/hocs/withSkeleton";
 import Image from "../Image/Image";
 
 import styles from "./styles.module.css";
@@ -32,6 +31,4 @@ const MoviesBanner = ({ item }) => {
   );
 };
 
-const MoviesBannerWithSkeleton = withSkeleton(MoviesBanner, "banner", 1);
-
-export default MoviesBannerWithSkeleton;
+export default MoviesBanner;
