@@ -5,7 +5,6 @@ import {
   getFoundMovies,
 } from "../../api/apiMovies";
 import Genres from "../../components/Genres/Genres";
-import LatestMovies from "../../components/LatestMovies/LatestMovies";
 import MoviesBanner from "../../components/MoviesBanner/MoviesBanner";
 import MoviesList from "../../components/MoviesList/MoviesList";
 import Pagination from "../../components/Pagination/Pagination";
@@ -71,8 +70,6 @@ const Main = () => {
 
   return (
     <main className={styles.main}>
-      <LatestMovies isLoading={isLoading} banners={data && data.results} />
-
       {dataGenres ? (
         <Genres
           genres={dataGenres.genres}
@@ -86,10 +83,10 @@ const Main = () => {
         setQuery={(query) => changeFilter("query", query)}
       />
 
-      {/* <MoviesBanner
+      <MoviesBanner
         isLoading={isLoading}
         item={data && data.results && data.results[0]}
-      /> */}
+      />
 
       <Pagination
         handlePreviousPage={handlePreviousPage}
