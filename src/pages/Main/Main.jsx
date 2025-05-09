@@ -86,11 +86,6 @@ const Main = () => {
         setQuery={(query) => changeFilter("query", query)}
       />
 
-      {/* <MoviesBanner
-        isLoading={isLoading}
-        item={data && data.results && data.results[0]}
-      /> */}
-
       <Pagination
         handlePreviousPage={handlePreviousPage}
         handleNextPage={handleNextPage}
