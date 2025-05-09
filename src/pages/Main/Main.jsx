@@ -7,6 +7,7 @@ import {
 import Genres from "../../components/Genres/Genres";
 import LatestMovies from "../../components/LatestMovies/LatestMovies";
 import MoviesBanner from "../../components/MoviesBanner/MoviesBanner";
+import MoviesByFilters from "../../components/MoviesByFilters/MoviesByFilters";
 import MoviesList from "../../components/MoviesList/MoviesList";
 import Pagination from "../../components/Pagination/Pagination";
 import Search from "../../components/Search/Search";
@@ -51,29 +52,36 @@ const Main = () => {
   });
 
   const { data, error, isLoading } = useFetch(getFunction, params);
-  const { data: dataGenres } = useFetch(getMovieGenres);
+  // const { data: dataGenres } = useFetch(getMovieGenres);
 
-  const handleNextPage = () => {
-    if (filters.page < TOTAL_PAGES) {
-      changeFilter("page", filters.page + 1);
-    }
-  };
+  // const handleNextPage = () => {
+  //   if (filters.page < TOTAL_PAGES) {
+  //     changeFilter("page", filters.page + 1);
+  //   }
+  // };
 
-  const handlePreviousPage = () => {
-    if (filters.page > 1) {
-      changeFilter("page", filters.page - 1);
-    }
-  };
+  // const handlePreviousPage = () => {
+  //   if (filters.page > 1) {
+  //     changeFilter("page", filters.page - 1);
+  //   }
+  // };
 
-  const handlePageClick = (pageNumber) => {
-    changeFilter("page", pageNumber);
-  };
+  // const handlePageClick = (pageNumber) => {
+  //   changeFilter("page", pageNumber);
+  // };
 
   return (
     <main className={styles.main}>
       <LatestMovies isLoading={isLoading} banners={data && data.results} />
 
-      {dataGenres ? (
+      <MoviesByFilters
+        movies={data?.results}
+        isLoading={isLoading}
+        filters={filters}
+        changeFilter={changeFilter}
+      />
+
+      {/* {dataGenres ? (
         <Genres
           genres={dataGenres.genres}
           selectedGenre={filters.with_genres}
@@ -102,7 +110,7 @@ const Main = () => {
         handlePageClick={handlePageClick}
         totalPages={TOTAL_PAGES}
         currentPage={filters.page}
-      />
+      /> */}
     </main>
   );
 };
