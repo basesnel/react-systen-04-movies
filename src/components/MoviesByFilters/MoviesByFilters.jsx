@@ -1,4 +1,5 @@
 import { TOTAL_PAGES } from "../../constants/constants";
+import HiddenTitle from "../HiddenTitle/HiddenTitle";
 import MoviesFilters from "../MoviesFilters/MoviesFilters";
 import MoviesList from "../MoviesList/MoviesList";
 import Pagination from "../Pagination/Pagination";
@@ -23,7 +24,8 @@ const MoviesByFilters = ({ filters, changeFilter, isLoading, movies }) => {
 
   return (
     <section className={styles.section}>
-      <h2 className={styles.hidden}>discovery movie by filters</h2>
+      <HiddenTitle title="discovery movie by filters" />
+      {/* <h2 className={styles.hidden}>discovery movie by filters</h2> */}
       <MoviesFilters filters={filters} changeFilter={changeFilter} />
 
       <Pagination
