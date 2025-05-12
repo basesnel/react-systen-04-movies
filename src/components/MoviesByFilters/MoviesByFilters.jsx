@@ -23,6 +23,7 @@ const MoviesByFilters = ({ filters, changeFilter, isLoading, movies }) => {
 
   return (
     <section className={styles.section}>
+      <h2 className={styles.hidden}>discovery movie by filters</h2>
       <MoviesFilters filters={filters} changeFilter={changeFilter} />
 
       <Pagination
