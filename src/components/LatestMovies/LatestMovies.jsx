@@ -1,3 +1,4 @@
+import HiddenTitle from "../HiddenTitle/HiddenTitle";
 import BannersList from "../BannersList/BannersList";
 
 import styles from "./styles.module.css";
@@ -5,7 +6,7 @@ import styles from "./styles.module.css";
 const LatestMovies = ({ banners, isLoading }) => {
   return (
     <section className={styles.section}>
-      <h2 className={styles.hidden}>latest popular movies</h2>
+      <HiddenTitle title="latest popular movies" />
       <BannersList banners={banners} isLoading={isLoading} />
     </section>
   );
