@@ -1,9 +1,13 @@
+import {
+  getMovies,
+  getDiscoveryMovies,
+  getFoundMovies,
+} from "../../api/apiMovies";
 import LatestMovies from "../../components/LatestMovies/LatestMovies";
 import MoviesByFilters from "../../components/MoviesByFilters/MoviesByFilters";
 import useDebounce from "../../helpers/hooks/useDebounce";
 import useFetch from "../../helpers/hooks/useFetch";
 import useFilters from "../../helpers/hooks/useFilters";
-import switchGet from "../../helpers/switchGet";
 
 import styles from "./styles.module.css";
 
@@ -16,9 +20,28 @@ const Main = () => {
 
   const debouncedMovieQwery = useDebounce(filters.query, 1500);
 
+  const switchGet = ({ queryLength, selectedGenreName }) => {
+    if (queryLength)
+      return {
+        getFunction: getFoundMovies,
+        params: { page: filters.page, query: debouncedMovieQwery },
+      };
+
+    if (!queryLength && !selectedGenreName)
+      return {
+        getFunction: getMovies,
+        params: { page: filters.page },
+      };
+
+    return {
+      getFunction: getDiscoveryMovies,
+      params: { page: filters.page, with_genres: filters.with_genres.id },
+    };
+  };
+
   const { getFunction, params } = switchGet({
-    query: debouncedMovieQwery,
-    filters: filters,
+    queryLength: debouncedMovieQwery.length,
+    selectedGenreName: filters?.with_genres?.name,
   });
 
   const { data, error, isLoading } = useFetch(getFunction, params);
