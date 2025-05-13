@@ -7,6 +7,7 @@ import HiddenTitle from "../HiddenTitle/HiddenTitle";
 import MoviesFilters from "../MoviesFilters/MoviesFilters";
 import MoviesList from "../MoviesList/MoviesList";
 import Pagination from "../Pagination/Pagination";
+import PaginationWrapper from "../PaginationWrapper/PaginationWrapper";
 import styles from "./styles.module.css";
 
 const MoviesByFilters = () => {
@@ -47,23 +48,17 @@ const MoviesByFilters = () => {
 
       <MoviesFilters filters={filters} changeFilter={changeFilter} />
 
-      <Pagination
+      <PaginationWrapper
+        top
+        bottom
         handlePreviousPage={handlePreviousPage}
         handleNextPage={handleNextPage}
         handlePageClick={handlePageClick}
         totalPages={TOTAL_PAGES}
         currentPage={filters.page}
-      />
-
-      <MoviesList isLoading={isLoading} movies={data?.results} />
-
-      <Pagination
-        handlePreviousPage={handlePreviousPage}
-        handleNextPage={handleNextPage}
-        handlePageClick={handlePageClick}
-        totalPages={TOTAL_PAGES}
-        currentPage={filters.page}
-      />
+      >
+        <MoviesList isLoading={isLoading} movies={data?.results} />
+      </PaginationWrapper>
     </section>
   );
 };
