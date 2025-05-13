@@ -6,7 +6,6 @@ import switchGet from "../../helpers/switchGet";
 import HiddenTitle from "../HiddenTitle/HiddenTitle";
 import MoviesFilters from "../MoviesFilters/MoviesFilters";
 import MoviesList from "../MoviesList/MoviesList";
-import Pagination from "../Pagination/Pagination";
 import PaginationWrapper from "../PaginationWrapper/PaginationWrapper";
 import styles from "./styles.module.css";
 
