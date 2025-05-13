@@ -25,7 +25,7 @@ const Main = () => {
 
   return (
     <main className={styles.main}>
-      <LatestMovies isLoading={isLoading} banners={data && data.results} />
+      <LatestMovies />
 
       <MoviesByFilters
         movies={data?.results}
