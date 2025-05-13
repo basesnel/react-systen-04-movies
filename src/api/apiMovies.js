@@ -120,10 +120,31 @@ const getFoundMovies = async ({ page = 1, query }) => {
     .catch((err) => console.error(err));
 };
 
+const getNowPlayingMovies = async ({ page = 1 }) => {
+  const options = {
+    url: `${API_BASE_URL}movie/now_playing`,
+    method: "GET",
+    params: {
+      language: "en-US",
+      page,
+    },
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${API_KEY}`,
+    },
+  };
+
+  return axios
+    .request(options)
+    .then((res) => res.data)
+    .catch((err) => console.error(err));
+};
+
 export {
   getConfiguration,
   getMovies,
   getMovieGenres,
   getDiscoveryMovies,
   getFoundMovies,
+  getNowPlayingMovies,
 };
