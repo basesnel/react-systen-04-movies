@@ -1,30 +1,11 @@
 import { TOTAL_PAGES } from "../../constants/constants";
-import useDebounce from "../../helpers/hooks/useDebounce";
-import useFetch from "../../helpers/hooks/useFetch";
-import useFilters from "../../helpers/hooks/useFilters";
-import switchGet from "../../helpers/switchGet";
 import HiddenTitle from "../HiddenTitle/HiddenTitle";
 import MoviesFilters from "../MoviesFilters/MoviesFilters";
 import MoviesList from "../MoviesList/MoviesList";
 import Pagination from "../Pagination/Pagination";
 import styles from "./styles.module.css";
 
-const MoviesByFilters = () => {
-  const { filters, changeFilter } = useFilters({
-    page: 1,
-    query: "",
-    with_genres: null,
-  });
-
-  const debouncedMovieQwery = useDebounce(filters.query, 1500);
-
-  const { getFunction, params } = switchGet({
-    query: debouncedMovieQwery,
-    filters: filters,
-  });
-
-  const { data, error, isLoading } = useFetch(getFunction, params);
-
+const MoviesByFilters = ({ filters, changeFilter, isLoading, movies }) => {
   const handleNextPage = () => {
     if (filters.page < TOTAL_PAGES) {
       changeFilter("page", filters.page + 1);
@@ -55,7 +36,7 @@ const MoviesByFilters = () => {
         currentPage={filters.page}
       />
 
-      <MoviesList isLoading={isLoading} movies={data?.results} />
+      <MoviesList isLoading={isLoading} movies={movies} />
 
       <Pagination
         handlePreviousPage={handlePreviousPage}
