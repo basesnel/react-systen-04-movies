@@ -11,7 +11,7 @@ const MoviesFilters = ({ filters, changeFilter }) => {
   return (
     <div className={styles.filters}>
       {dataGenres ? (
-        <Slider>
+        <Slider step={10}>
           <Genres
             genres={dataGenres.genres}
             selectedGenre={filters.with_genres}

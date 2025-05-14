@@ -1,15 +1,15 @@
 import React, { useRef } from "react";
 import styles from "./styles.module.css";
 
-const Slider = ({ children }) => {
+const Slider = ({ children, step = 150 }) => {
   const sliderRef = useRef(null);
 
   const scrollLeft = () => {
-    sliderRef.current.scrollLeft -= 150;
+    sliderRef.current.scrollLeft -= step;
   };
 
   const scrollRight = () => {
-    sliderRef.current.scrollLeft += 150;
+    sliderRef.current.scrollLeft += step;
   };
 
   return (
